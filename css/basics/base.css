@@ -22,3 +22,26 @@ a {
 .hidden {
  display: none;
 }
+
+button {
+ display: block;
+}
+
+.canvas-container {
+ position: relative;
+ width: 50vw;
+ background-color: lightsteelblue;
+ border: 1px solid lightgray;
+}
+
+img {
+ display: block;
+ min-width: 400px;
+ min-height: 400px;
+}
+
+.text {
+ position: absolute;
+ width: 100%;
+ min-height: 20%;
+}

@@ -10,7 +10,7 @@
 
 </head>
 
-<body>
+<body onload=" onInit()">
  <header class="main-header">
   <div class="logo">MaxiMeme</div>
   <nav class="links-container clean-anchor">
@@ -21,20 +21,24 @@
 
  <main class="meme-generator-container flex space-between">
   <section class="canvas-container">
-   <canvas width="500" height="500"></canvas>
+   <canvas width="800" height="800"></canvas>
+   <div class="text"></div>
   </section>
 
   <section class="settings-container">
-   <textarea name="settings" id="settings" cols="30" rows="1"></textarea>
-   <a href=""></a>
-   <a href=""></a>
-   <a href=""></a>
-   <a href=""></a>
-   <a href=""></a>
+   <label>top text</label>
+   <input oninput="onWritingTxt(this)" id="txt" class="meme-input" type="text">
+   <button></button>
+   <button></button>
+   <button></button>
+   <button></button>
+   <button></button>
   </section>
-
  </main>
-
+ <section class="select-img-container">
+  <img class="lotr" src="meme-imgs/2.jpg" onclick="onSelectImg(this)" />
+  <img class="lotr" src="meme-imgs/003.jpg" onclick="onSelectImg(this)" />
+ </section>
  <footer class="main-footer">
   <div class="logo"></div>
   <small class="rights"></small>
