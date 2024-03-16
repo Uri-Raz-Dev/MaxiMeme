@@ -21,13 +21,12 @@
 
  <main class="meme-generator-container flex space-between">
   <section class="canvas-container">
-   <canvas width="800" height="800"></canvas>
-   <div class="text"></div>
+   <canvas width="500" height="500"></canvas>
+   <div class="text" data-line-id="0"></div>
   </section>
 
   <section class="settings-container">
-   <label>top text</label>
-   <input oninput="onWritingTxt(this)" id="txt" class="meme-input" type="text">
+   <!-- <input oninput="onWritingTxt(this)" id="txt" class="meme-input" type="text"> -->
    <button></button>
    <button></button>
    <button></button>
@@ -37,7 +36,7 @@
  </main>
  <section class="select-img-container">
   <img class="lotr" src="meme-imgs/2.jpg" onclick="onSelectImg(this)" />
-  <img class="lotr" src="meme-imgs/003.jpg" onclick="onSelectImg(this)" />
+  <img src="meme-imgs/003.jpg" onclick="onSelectImg(this)" />
  </section>
  <footer class="main-footer">
   <div class="logo"></div>

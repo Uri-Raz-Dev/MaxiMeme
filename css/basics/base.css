@@ -36,12 +36,14 @@ button {
 
 img {
  display: block;
- min-width: 400px;
- min-height: 400px;
+ width: 500px;
+ height: 500px;
 }
 
 .text {
  position: absolute;
- width: 100%;
- min-height: 20%;
+ top: 0;
+ left: 160px;
+ z-index: 0;
+ border: 1px dotted white;
 }

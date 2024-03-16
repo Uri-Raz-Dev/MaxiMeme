@@ -1,22 +1,30 @@
 'use strict'
-
-var gImgs = [{ id: 1, url: 'meme-imgs/2.jpg', keywords: ['funny', 'cat'] }]
+const STOARGE_KEY = 'memeDB'
 var gMeme = {
- selectedImgId: 5,
+ selectedImgId: 2,
  selectedLineIdx: 0,
  lines: [
   {
-   txt: 'I sometimes eat Falafel',
-   size: 20,
-   color: 'red'
-  }
- ]
+   txt: "",
+   size: 30,
+   color: "",
+  },
+ ],
 }
-var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
+var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
 
-function getMeme() {
- const meme = gMeme
-
- return meme
+function getMemes() {
+ return gMeme
 }
 
+function setLineTxt(newText) {
+ let memeData = getMemes()
+ memeData.lines[memeData.selectedLineIdx].txt = newText
+}
+
+function setImg(imgId) {
+ gMeme.selectedImgId = imgId
+}
+function _savePlace() {
+ saveToStorage(STOARGE_KEY, gMeme)
+}
