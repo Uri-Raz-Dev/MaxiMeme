@@ -1,16 +1,18 @@
 'use strict'
-const STOARGE_KEY = 'memeDB'
+const STOARGE_KEY = 'memesDB'
+
 var gMeme = {
- selectedImgId: 2,
+ selectedImgId: 21,
  selectedLineIdx: 0,
  lines: [
   {
-   txt: "",
+   txt: '',
    size: 30,
-   color: "",
+   color: '',
   },
  ],
 }
+
 var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
 
 function getMemes() {
@@ -18,13 +20,16 @@ function getMemes() {
 }
 
 function setLineTxt(newText) {
- let memeData = getMemes()
+ const memeData = getMemes()
  memeData.lines[memeData.selectedLineIdx].txt = newText
 }
 
 function setImg(imgId) {
+ const [{ id }] = gImgs
+ imgId = id
  gMeme.selectedImgId = imgId
 }
-function _savePlace() {
+
+function _saveMeme() {
  saveToStorage(STOARGE_KEY, gMeme)
 }

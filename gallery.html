@@ -10,32 +10,18 @@
 
 </head>
 
-<body onload=" onInit()">
+<body onload="galleryOnInit()">
  <header class="main-header">
   <div class="logo">MaxiMeme</div>
   <nav class="links-container clean-anchor">
-   <a href="gallery.html">gallery</a>
+   <a href="index.html">Home</a>
    <a href="#"></a>
   </nav>
  </header>
 
- <main class="meme-generator-container flex space-between">
-  <section class="canvas-container">
-   <canvas width="700" height="800"></canvas>
-   <div class="text" data-line-id="0"></div>
-  </section>
+ <main class="gallery flex space-evenly flex-wrap">
 
-  <section class="settings-container">
-   <!-- <input oninput="onWritingTxt(this)" id="txt" class="meme-input" type="text"> -->
-   <button></button>
-   <button></button>
-   <button></button>
-   <button></button>
-   <button></button>
-  </section>
  </main>
-
-
 
  <footer class="main-footer">
   <div class="logo"></div>
@@ -46,7 +32,8 @@
    <a href="#"></a>
   </nav>
  </footer>
- <img onclick="onImgSelect(10)" src="meme-imgs/10.jpg" alt="">
+ <!-- <img src="meme-imgs/1.jpg" alt="">
+ <img src="meme-imgs/2.jpg" alt=""> -->
  <script src="services/util.service.js"></script>
  <script src="services/stoarge.service.js"></script>
  <script src="services/gallery.service.js"></script>
@@ -54,7 +41,6 @@
 
  <script src="meme.controller.js"></script>
  <script src="gallery.controller.js"></script>
-
 
 </body>
 

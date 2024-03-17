@@ -10,6 +10,10 @@
  justify-content: space-around;
 }
 
+.flex.space-evenly {
+ justify-content: space-evenly;
+}
+
 .flex.justify-center {
  justify-content: center;
 }
@@ -24,6 +28,10 @@
 
 .flex.flex-column {
  flex-direction: column;
+}
+
+.flex.flex-wrap {
+ flex-wrap: wrap;
 }
 
 /* list helpers */

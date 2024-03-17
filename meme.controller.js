@@ -10,7 +10,6 @@ function onInit() {
     drawImg()
     renderMeme()
     renderSettings()
-    // renderGallery()
 }
 
 function renderSettings() {
@@ -28,20 +27,20 @@ function renderSettings() {
 
 
 
-// oninput = "onUpdateTxt(this.value)"
 
 function renderMeme() {
     drawImg()
     drawText()
 }
 
-function drawImg() {
-    const imgData = getMemes()
+function drawImg(id) {
     const img = new Image()
-    img.src = `meme-imgs/${imgData.selectedImgId}.jpg`
+    if (!id) return
+    img.src = `meme-imgs/${id}.jpg`
     img.onload = () => {
         resizeCanvas(img)
         window.removeEventListener("resize", () => resizeCanvas(img))
+
         drawText()
     }
 }
@@ -64,19 +63,19 @@ function drawText() {
     gCtx.fillStyle = txtColor
     gCtx.font = `${fontSize}px Arial`
     gCtx.textAlign = "center"
-    gCtx.fillText(txt, gElCanvas.width / 2, 40)
+    gCtx.fillText(txt, gElCanvas.width / 2, 30)
 }
 
 
 function onUpdateTxt(newText) {
     setLineTxt(newText)
-    renderMeme()
+    renderMeme(id)
 }
 
-function onImgSelect(imgId) {
-    setImg(imgId)
+function onImgSelect(id) {
+    setImg(id)
+    drawImg(id)
     renderMeme()
-    document.querySelector('.canvas-container').style.display = "block"
 }
 
 function onSave() {
@@ -87,7 +86,7 @@ function onLoad() {
     const savedImageData = loadFromStorage("canvasDB")
     if (savedImageData) {
         const img = new Image()
-        img.onload = function () {
+        img.onload = () => {
             gCtx.drawImage(img, 0, 0)
         }
         img.src = savedImageData
@@ -120,3 +119,4 @@ function decreaseFontSize() {
     meme.lines[meme.selectedLineIdx].size -= 3
     renderMeme()
 }
+

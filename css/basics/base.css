@@ -30,14 +30,6 @@ button {
 .canvas-container {
  position: relative;
  width: 50vw;
- background-color: lightsteelblue;
- border: 1px solid lightgray;
-}
-
-img {
- display: block;
- width: 500px;
- height: 500px;
 }
 
 .text {
