@@ -18,3 +18,4 @@ function renderGallery() {
  elGallery.innerHTML = strHtml.join('')
 }
 
+// add img
