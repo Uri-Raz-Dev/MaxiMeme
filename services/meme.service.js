@@ -36,3 +36,18 @@ function setImg(imgId) {
 function _saveMeme() {
  saveToStorage(STOARGE_KEY, gMeme)
 }
+
+function getLine(lineId) {
+ const selectLine = gImgs.find(line => line.selectedLineIdx === lineId)
+ return selectLine
+}
+
+function addTxtLine() {
+ const { lines } = gMeme
+ lines.push({
+  txt: 'Please enter text here',
+  size: 30,
+  color: '',
+ })
+ return lines
+}

@@ -17,12 +17,13 @@ function onInit() {
 function renderSettings() {
     const elSettingsContainer = document.querySelector('.txtline-container')
     const meme = getMemes()
-    var { selectedLineIdx, lines: [{ txt, size, color }] } = meme
     var i = 1
-    const strHtml = `
-        <label for="txt">Line ${i}</label>
-        <input oninput = "onUpdateTxt(this.value)" data-id="${selectedLineIdx}" id="txt" class="meme-input" type="text">
-    `
+    const strHtml = meme.lines.map(line => {
+        var { selectedLineIdx } = line
+        return `
+        <label for="txt">Line ${i++}</label>
+        <input oninput = "onUpdateTxt(this.value)" data-id="${selectedLineIdx}" id="txt" class="meme-input" type="text"></input>`
+    })
 
     elSettingsContainer.innerHTML = strHtml
 }
@@ -139,15 +140,8 @@ function onSetFillColor(color) {
     gCtx.fillStyle = color
 }
 
-function increaseFontSize() {
-    const meme = getMemes()
-    meme.lines[meme.selectedLineIdx].size += 3
+function onAddTxtLine() {
+    addTxtLine()
+    renderSettings()
     renderMeme()
 }
-
-function decreaseFontSize() {
-    const meme = getMemes()
-    meme.lines[meme.selectedLineIdx].size -= 3
-    renderMeme()
-}
-

@@ -27,4 +27,3 @@ function getImg(imgId) {
  const selectImg = gImgs.find(img => img.id === imgId)
  return selectImg
 }
-

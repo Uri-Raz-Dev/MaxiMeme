@@ -35,3 +35,7 @@ button {
  position: relative;
  width: 50vw;
 }
+
+input {
+ display: block;
+}
