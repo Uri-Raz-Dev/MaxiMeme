@@ -4,6 +4,10 @@
  box-sizing: border-box;
 }
 
+html {
+ scroll-behavior: smooth;
+}
+
 body {
  padding: 0;
  margin: 0;
@@ -30,12 +34,4 @@ button {
 .canvas-container {
  position: relative;
  width: 50vw;
-}
-
-.text {
- position: absolute;
- top: 0;
- left: 160px;
- z-index: 0;
- border: 1px dotted white;
 }

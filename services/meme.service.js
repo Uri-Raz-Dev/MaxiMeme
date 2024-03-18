@@ -6,7 +6,7 @@ var gMeme = {
  selectedLineIdx: 0,
  lines: [
   {
-   txt: '',
+   txt: 'Please enter text here',
    size: 30,
    color: '',
   },
@@ -19,15 +19,18 @@ function getMemes() {
  return gMeme
 }
 
-function setLineTxt(newText) {
- const memeData = getMemes()
- memeData.lines[memeData.selectedLineIdx].txt = newText
+function setLineTxt(lineTxt) {
+ const meme = gMeme
+ meme.lines[meme.selectedLineIdx].txt = lineTxt
 }
 
 function setImg(imgId) {
- const [{ id }] = gImgs
- imgId = id
- gMeme.selectedImgId = imgId
+
+ const imgs = gImgs.find(img => {
+  if (img.id === imgId)
+   gMeme.selectedImgId = imgId
+ })
+ return imgs
 }
 
 function _saveMeme() {

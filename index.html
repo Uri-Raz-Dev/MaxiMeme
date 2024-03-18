@@ -22,20 +22,26 @@
  <main class="meme-generator-container flex space-between">
   <section class="canvas-container">
    <canvas width="700" height="800"></canvas>
-   <div class="text" data-line-id="0"></div>
   </section>
 
   <section class="settings-container">
-   <!-- <input oninput="onWritingTxt(this)" id="txt" class="meme-input" type="text"> -->
-   <button></button>
-   <button></button>
-   <button></button>
-   <button></button>
-   <button></button>
+   <section class="txtline-container">
+   </section>
+   <section class="button-container">
+    <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
+    <input oninput="colorTxt(this.value)" class="color-picker" type="color" value="#323522"></input>
+    <button onclick="changeFontSize(3)" class="fontsize-up">fontup</button>
+    <button onclick="changeFontSize(-3)" class="fontsize-down">fontdown</button>
+   </section>
   </section>
  </main>
 
+ <section class="gallery flex space-evenly flex-wrap">
 
+ </section>
+
+
+ <a href="#">test</a>
 
  <footer class="main-footer">
   <div class="logo"></div>
@@ -46,14 +52,13 @@
    <a href="#"></a>
   </nav>
  </footer>
- <img onclick="onImgSelect(10)" src="meme-imgs/10.jpg" alt="">
  <script src="services/util.service.js"></script>
  <script src="services/stoarge.service.js"></script>
  <script src="services/gallery.service.js"></script>
  <script src="services/meme.service.js"></script>
 
- <script src="meme.controller.js"></script>
  <script src="gallery.controller.js"></script>
+ <script src="meme.controller.js"></script>
 
 
 </body>
