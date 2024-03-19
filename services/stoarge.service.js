@@ -9,3 +9,7 @@ function loadFromStorage(key) {
  const valStr = localStorage.getItem(key)
  return JSON.parse(valStr)
 }
+
+function saveMemesToStorage(meme) {
+ localStorage.setItem('meme', JSON.stringify(meme));
+}
