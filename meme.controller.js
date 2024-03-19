@@ -66,22 +66,22 @@ function resizeCanvas(img) {
 }
 
 function drawText() {
-    const meme = getMemes()
-    const lines = meme.lines
+    const meme = getMemes();
+    const lines = meme.lines;
     lines.forEach((line, index) => {
-        const { txt, size, color, posX, posY } = line; // Get position properties
+        const { txt, size, color, posX, posY } = line;
         let fontSize = size;
 
         gCtx.font = `${fontSize}px Arial`;
         let textWidth = gCtx.measureText(txt).width;
         let lineHeight = fontSize * 1.286;
 
+        let x = posX || gElCanvas.width / 3.8;
+        let y = posY || 30 + index * lineHeight;
+
         gCtx.textAlign = 'left';
         gCtx.textBaseline = 'top';
         gCtx.fillStyle = color;
-
-        let x = posX || gElCanvas.width / 3.8; // Use stored position or default position
-        let y = posY || 30 + index * lineHeight;
 
         if (index === meme.selectedLineIdx) {
             gCtx.strokeStyle = 'yellow';
@@ -185,6 +185,7 @@ function onSwitchLine() {
 
 
     inputs[nextIdx].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" })
+    renderMeme()
 }
 
 'use strict'
@@ -197,14 +198,14 @@ function getSelectedLineIdx(x, y) {
     const meme = getMemes();
     const lines = meme.lines;
     for (let i = 0; i < lines.length; i++) {
-        const { txt, size, color } = lines[i];
+        const { txt, size, color, posX, posY } = lines[i];
         let fontSize = size;
         gCtx.font = `${fontSize}px Arial`;
         let textWidth = gCtx.measureText(txt).width;
         let lineHeight = fontSize * 1.286;
 
-        let x1 = gElCanvas.width / 3.8;
-        let y1 = 30 + i * lineHeight;
+        let x1 = posX || gElCanvas.width / 3.8;
+        let y1 = posY || 30 + i * lineHeight;
         let x2 = x1 + textWidth;
         let y2 = y1 + lineHeight;
 
@@ -214,6 +215,7 @@ function getSelectedLineIdx(x, y) {
     }
     return -1; // No text element selected
 }
+
 
 function onMouseDown(event) {
     const mouseX = event.clientX - gElCanvas.getBoundingClientRect().left;
@@ -225,8 +227,8 @@ function onMouseDown(event) {
         isDragging = true;
         const meme = getMemes();
         const line = meme.lines[selectedLineIdx];
-        dragOffsetX = mouseX - (gElCanvas.width / 3.8); // Calculate offset from text position
-        dragOffsetY = mouseY - (30 + selectedLineIdx * (line.size * 1.286)); // Calculate offset from text position
+        dragOffsetX = mouseX - (line.posX || gElCanvas.width / 3.8); // Calculate offset from text position
+        dragOffsetY = mouseY - (line.posY || 30 + selectedLineIdx * (line.size * 1.286)); // Calculate offset from text position
     }
 }
 
@@ -259,13 +261,11 @@ function onMouseMove(event) {
         line.posX = mouseX - dragOffsetX; // Update text position based on mouse movement
         line.posY = mouseY - dragOffsetY;
 
-        renderMeme(); // Redraw the canvas after updating text position
+        renderMeme(); // Redraw the entire meme including text at its updated position
     }
 }
-
-// Function to handle touch move event
 function onTouchMove(event) {
-    event.preventDefault(); // Prevent default touch behavior
+    event.preventDefault();
     if (isDragging) {
         const touch = event.touches[0];
         const touchX = touch.clientX - gElCanvas.getBoundingClientRect().left;
@@ -274,38 +274,36 @@ function onTouchMove(event) {
         const meme = getMemes();
         const selectedLineIdx = meme.selectedLineIdx;
         const line = meme.lines[selectedLineIdx];
-        line.posX = touchX - dragOffsetX; // Update text position based on touch movement
+        line.posX = touchX - dragOffsetX;
         line.posY = touchY - dragOffsetY;
 
         renderMeme(); // Redraw the canvas after updating text position
     }
 }
-
 // Function to handle mouse up event
 function onMouseUp(event) {
-    isDragging = false; // Reset dragging flag on mouse up event
+    isDragging = false
 }
 
 // Function to handle touch end event
 function onTouchEnd(event) {
-    isDragging = false; // Reset dragging flag on touch end event
+    isDragging = false
 }
 
 function selectText(lineIdx) {
     const meme = getMemes();
-    meme.selectedLineIdx = lineIdx; // Select the clicked text
+    meme.selectedLineIdx = lineIdx;
 
-    // Redraw the canvas with the selected text
     renderMeme();
 
-    // Focus on the corresponding input line after rendering
+
     setTimeout(() => {
         const inputs = document.querySelectorAll('.meme-input');
         inputs.forEach((input, index) => {
             if (index === lineIdx) {
                 input.focus();
             } else {
-                input.blur(); // Remove focus from other inputs
+                input.blur();
             }
         });
     }, 0);
