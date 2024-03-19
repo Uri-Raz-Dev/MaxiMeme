@@ -241,11 +241,12 @@ function onTouchStart(event) {
 
     const selectedLineIdx = getSelectedLineIdx(touchX, touchY);
     if (selectedLineIdx !== -1) {
+        selectText(selectedLineIdx);
         isDragging = true;
         const meme = getMemes();
         const line = meme.lines[selectedLineIdx];
-        dragOffsetX = touchX - (gElCanvas.width / 3.8); // Calculate offset from text position
-        dragOffsetY = touchY - (30 + selectedLineIdx * (line.size * 1.286)); // Calculate offset from text position
+        dragOffsetX = touchX - (line.posX || gElCanvas.width / 3.8); // Calculate offset from text position
+        dragOffsetY = touchY - (line.posY || 30 + selectedLineIdx * (line.size * 1.286)); // Calculate offset from text position
     }
 }
 
