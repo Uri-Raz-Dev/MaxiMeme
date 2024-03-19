@@ -17,15 +17,12 @@ function onInit() {
 function renderSettings() {
     const elSettingsContainer = document.querySelector('.txtline-container')
     const meme = getMemes()
-    var i = 1
-    const strHtml = meme.lines.map(line => {
-        var { selectedLineIdx } = line
+    const strHtml = meme.lines.map((line, idx) => {
         return `
-        <label for="txt">Line ${i++}</label>
-        <input oninput = "onUpdateTxt(this.value)" data-id="${selectedLineIdx}" id="txt" class="meme-input" type="text"></input>`
+        <label for="txt">Line ${idx + 1}</label>
+        <input oninput = "onUpdateTxt(this.value)" onclick="onLineSelect(${idx})" data-id="${idx}" id="txt" class="meme-input" placeholder="please add text here" type="text"></input>`
     })
-
-    elSettingsContainer.innerHTML = strHtml
+    elSettingsContainer.innerHTML = strHtml.join('')
 }
 
 
@@ -59,23 +56,38 @@ function resizeCanvas(img) {
 }
 
 function drawText() {
-    const memeInfo = getMemes()
-    const txt = memeInfo.lines[memeInfo.selectedLineIdx].txt
-    const fontSize = memeInfo.lines[memeInfo.selectedLineIdx].size
+    const meme = getMemes()
+    const lines = meme.lines
+    lines.forEach((line, index) => {
+        const { txt, size, color } = line
+        let fontSize = size
 
-    var textWidth = gCtx.measureText(txt).width
-    var lineHeight = fontSize * 1.286;
+        gCtx.font = `${fontSize}px Arial`
+        let textWidth = gCtx.measureText(txt).width
+        let lineHeight = fontSize * 1.286
 
-    gCtx.font = `${fontSize}px Arial`
-    gCtx.textAlign = 'left';
-    gCtx.textBaseline = 'top';
-    gCtx.fillText(txt, gElCanvas.width / 3.8, 30)
-    gCtx.strokeRect(gElCanvas.width / 3.8, 30, textWidth, lineHeight);
+        gCtx.textAlign = 'left'
+        gCtx.textBaseline = 'top'
+        gCtx.fillStyle = color
 
+        let x = gElCanvas.width / 3.8
+        let y = 30 + index * lineHeight
+
+        if (index === meme.selectedLineIdx) {
+            gCtx.strokeStyle = 'yellow'
+            gCtx.strokeRect(x, y, textWidth, lineHeight)
+        } else {
+            gCtx.strokeStyle = 'transparent'
+        }
+
+        gCtx.fillText(txt, x, y)
+    });
 }
+
 
 function colorTxt(elColor) {
     const meme = getMemes()
+
     meme.lines[meme.selectedLineIdx].color = elColor
     const txtColor = meme.lines[meme.selectedLineIdx].color
     gCtx.fillStyle = txtColor
@@ -86,7 +98,7 @@ function changeFontSize(elValue) {
     const meme = getMemes()
     if (elValue >= 3) {
         meme.lines[meme.selectedLineIdx].size += elValue
-    } else if (elValue <= -3) {
+    } else if (elValue <= +3) {
         meme.lines[meme.selectedLineIdx].size -= Math.abs(elValue)
 
     }
@@ -94,10 +106,8 @@ function changeFontSize(elValue) {
 }
 
 function onUpdateTxt(elTxt) {
-    // const inputTxt = document.querySelector('#txt1')
 
     setLineTxt(elTxt)
-    // inputTxt.innerText = txt
 
     renderMeme()
 }
@@ -134,6 +144,7 @@ function downloadCanvas(elLink) {
 
     const dataUrl = gElCanvas.toDataURL()
     elLink.href = dataUrl
+    gCtx.strokeStyle = 'transparent'
 }
 
 function onSetFillColor(color) {
@@ -144,4 +155,24 @@ function onAddTxtLine() {
     addTxtLine()
     renderSettings()
     renderMeme()
+}
+
+function onLineSelect(lineIdx) {
+    const meme = getMemes()
+    meme.selectedLineIdx = lineIdx
+    renderMeme()
+}
+
+function onSwitchLine() {
+    const inputs = document.querySelectorAll('.meme-input')
+    const currentIdx = gMeme.selectedLineIdx
+    const nextIdx = (currentIdx + 1) % inputs.length
+
+    inputs[currentIdx].blur()
+    inputs[nextIdx].focus()
+
+    gMeme.selectedLineIdx = nextIdx
+
+
+    inputs[nextIdx].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" })
 }
