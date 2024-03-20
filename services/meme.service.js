@@ -6,14 +6,13 @@ var gMeme = {
   selectedLineIdx: 0,
   lines: [
     {
-      txt: 'Please enter text here',
+      txt: 'Enter text here',
       size: 30,
-      color: '',
+      color: 'black',
     }
 
   ],
 }
-console.log(gMeme.selectedLineIdx);
 var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
 
 function getMemes() {
@@ -45,11 +44,22 @@ function getLine(lineId) {
 
 function addTxtLine() {
   const { lines } = gMeme
+  if (lines.length >= 10) return
   lines.push({
-    txt: 'Please enter text here',
+    txt: 'Enter text here',
     size: 30,
-    color: '',
+    color: 'black',
   })
   return lines
 }
+
+function deleteTxtLine(idx) {
+  const { lines } = gMeme
+  lines.splice(idx, 1)
+
+  return lines
+}
+
+
+
 

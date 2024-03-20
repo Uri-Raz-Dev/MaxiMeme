@@ -3,34 +3,31 @@
 var gElCanvas
 var gCtx
 var gLine = []
-var isDragging = false; // Flag to track if dragging is in progress
-var dragOffsetX, dragOffsetY; // Offset to adjust the position while dragging
-
+var isDragging = false
+var gDragOffsetX, gDragOffsetY
 
 function onInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-
-
+    const elMemeGen = document.querySelector('.meme-generator-container')
+    elMemeGen.style.display = 'none'
     renderMeme()
     renderSettings()
     renderGallery()
 
-    gElCanvas.addEventListener('mousedown', onMouseDown);
-    gElCanvas.addEventListener('touchstart', onTouchStart);
-    gElCanvas.addEventListener('mousemove', onMouseMove);
-    gElCanvas.addEventListener('touchmove', onTouchMove);
-    gElCanvas.addEventListener('mouseup', onMouseUp);
-    gElCanvas.addEventListener('touchend', onTouchEnd);
+    addListeners()
 }
+
 
 function renderSettings() {
     const elSettingsContainer = document.querySelector('.txtline-container')
     const meme = getMemes()
     const strHtml = meme.lines.map((line, idx) => {
         return `
-        <label for="txt">Line ${idx + 1}</label>
-        <input oninput = "onUpdateTxt(this.value)" onclick="onLineSelect(${idx})" data-id="${idx}" id="txt" class="meme-input" placeholder="please add text here" type="text"></input>`
+        <input oninput = "onUpdateTxt(this.value)" onclick="onLineSelect(${idx})" data-id="${idx}" id="txt" class="meme-input" placeholder="Text #${idx + 1}" type="text">
+        <a class="delete-btn" onclick="onDeleteTxtLine(${idx})">x</a>
+
+        </input>`
     })
     elSettingsContainer.innerHTML = strHtml.join('')
 }
@@ -66,62 +63,77 @@ function resizeCanvas(img) {
 }
 
 function drawText() {
-    const meme = getMemes();
-    const lines = meme.lines;
+    const meme = getMemes()
+    const lines = meme.lines
     lines.forEach((line, index) => {
-        const { txt, size, color, posX, posY } = line;
-        let fontSize = size;
+        const { txt, size, color, posX, posY } = line
+        let fontSize = size
 
-        gCtx.font = `${fontSize}px Arial`;
-        let textWidth = gCtx.measureText(txt).width;
-        let lineHeight = fontSize * 1.286;
+        gCtx.font = `${fontSize}px Arial`
+        let textWidth = gCtx.measureText(txt).width
+        let lineHeight = fontSize * 1.286
 
-        let x = posX || gElCanvas.width / 3.8;
-        let y = posY || 30 + index * lineHeight;
+        let x = posX || gElCanvas.width / 3.8
+        let y = posY || 30 + index * lineHeight
 
-        gCtx.textAlign = 'left';
-        gCtx.textBaseline = 'top';
-        gCtx.fillStyle = color;
+        gCtx.textAlign = 'left'
+        gCtx.textBaseline = 'top'
+        gCtx.fillStyle = color
 
-        if (index === meme.selectedLineIdx) {
-            gCtx.strokeStyle = 'yellow';
-            gCtx.strokeRect(x, y, textWidth, lineHeight);
+        if (txt.trim() !== '') {
+            if (index === meme.selectedLineIdx) {
+                gCtx.strokeStyle = 'yellow'
+                gCtx.strokeRect(x, y, textWidth, lineHeight)
+            } else {
+                gCtx.strokeStyle = 'transparent'
+            }
+            gCtx.fillText(txt, x, y)
         } else {
-            gCtx.strokeStyle = 'transparent';
+            gCtx.strokeStyle = 'transparent'
         }
-
-        gCtx.fillText(txt, x, y);
-    });
+    })
 }
 
-function colorTxt(elColor) {
+function onSetColorTxt(elColor) {
     const meme = getMemes()
-
     meme.lines[meme.selectedLineIdx].color = elColor
-    const txtColor = meme.lines[meme.selectedLineIdx].color
-    gCtx.fillStyle = txtColor
     renderMeme()
 }
 
 function changeFontSize(elValue) {
     const meme = getMemes()
+
     if (elValue >= 3) {
         meme.lines[meme.selectedLineIdx].size += elValue
-    } else if (elValue <= +3) {
+    } else if (elValue <= 3) {
         meme.lines[meme.selectedLineIdx].size -= Math.abs(elValue)
-
     }
+
     renderMeme()
 }
-
 function onUpdateTxt(elTxt) {
-
     setLineTxt(elTxt)
-
     renderMeme()
 }
 
+function onDeleteTxtLine(idx) {
+    const elTxtLine = document.querySelectorAll('.meme-input')[idx]
+    const elDeleteBtn = document.querySelectorAll('.delete-btn')[idx]
+
+    deleteTxtLine(idx)
+    elTxtLine.classList.add('hidden');
+    elDeleteBtn.classList.add('hidden');
+    renderSettings()
+    renderMeme();
+}
 function onImgSelect(id) {
+    const elMemeGen = document.querySelector('.meme-generator-container')
+    const elGallery = document.querySelector('.gallery')
+
+
+    elMemeGen.style.display = 'flex'
+    elGallery.style.display = 'none'
+
     setImg(id)
     drawImg(id)
     renderMeme()
@@ -152,13 +164,12 @@ function downloadCanvas(elLink) {
     elLink.download = 'my-img'
 
     const dataUrl = gElCanvas.toDataURL()
-    elLink.href = dataUrl
-    gCtx.strokeStyle = 'transparent'
+    const meme = getMemes()
+    meme.selectedLineIdx = -1
+    renderMeme()
 }
 
-function onSetFillColor(color) {
-    gCtx.fillStyle = color
-}
+
 
 function onAddTxtLine() {
     addTxtLine()
@@ -169,7 +180,7 @@ function onAddTxtLine() {
 function onLineSelect(lineIdx) {
     const meme = getMemes()
     meme.selectedLineIdx = lineIdx
-    selectText(lineIdx);
+    selectText(lineIdx)
     renderMeme()
 }
 
@@ -188,124 +199,134 @@ function onSwitchLine() {
     renderMeme()
 }
 
-'use strict'
 
-// Add event listener for touch events
+
+
 
 
 
 function getSelectedLineIdx(x, y) {
-    const meme = getMemes();
-    const lines = meme.lines;
+    const meme = getMemes()
+    const lines = meme.lines
     for (let i = 0; i < lines.length; i++) {
-        const { txt, size, color, posX, posY } = lines[i];
-        let fontSize = size;
-        gCtx.font = `${fontSize}px Arial`;
-        let textWidth = gCtx.measureText(txt).width;
-        let lineHeight = fontSize * 1.286;
+        const { txt, size, color, posX, posY } = lines[i]
+        let fontSize = size
+        gCtx.font = `${fontSize}px Arial`
+        let textWidth = gCtx.measureText(txt).width
+        let lineHeight = fontSize * 1.286
 
-        let x1 = posX || gElCanvas.width / 3.8;
-        let y1 = posY || 30 + i * lineHeight;
-        let x2 = x1 + textWidth;
-        let y2 = y1 + lineHeight;
+        let x1 = posX || gElCanvas.width / 3.8
+        let y1 = posY || 30 + i * lineHeight
+        let x2 = x1 + textWidth
+        let y2 = y1 + lineHeight
 
         if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
-            return i;
+            return i
         }
     }
-    return -1; // No text element selected
+    return -1
 }
 
 
 function onMouseDown(event) {
-    const mouseX = event.clientX - gElCanvas.getBoundingClientRect().left;
-    const mouseY = event.clientY - gElCanvas.getBoundingClientRect().top;
+    const mouseX = event.clientX - gElCanvas.getBoundingClientRect().left
+    const mouseY = event.clientY - gElCanvas.getBoundingClientRect().top
 
-    const selectedLineIdx = getSelectedLineIdx(mouseX, mouseY);
+    const selectedLineIdx = getSelectedLineIdx(mouseX, mouseY)
     if (selectedLineIdx !== -1) {
-        selectText(selectedLineIdx);
-        isDragging = true;
-        const meme = getMemes();
-        const line = meme.lines[selectedLineIdx];
-        dragOffsetX = mouseX - (line.posX || gElCanvas.width / 3.8); // Calculate offset from text position
-        dragOffsetY = mouseY - (line.posY || 30 + selectedLineIdx * (line.size * 1.286)); // Calculate offset from text position
+        selectText(selectedLineIdx)
+        isDragging = true
+        const meme = getMemes()
+        const line = meme.lines[selectedLineIdx]
+        gDragOffsetX = mouseX - (line.posX || gElCanvas.width / 3.8)
+        gDragOffsetY = mouseY - (line.posY || 30 + selectedLineIdx * (line.size * 1.286))
     }
 }
 
-// Function to handle touch start event
+
 function onTouchStart(event) {
-    event.preventDefault(); // Prevent default touch behavior
-    const touch = event.touches[0];
-    const touchX = touch.clientX - gElCanvas.getBoundingClientRect().left;
-    const touchY = touch.clientY - gElCanvas.getBoundingClientRect().top;
+    event.preventDefault()
+    const touch = event.touches[0]
+    const touchX = touch.clientX - gElCanvas.getBoundingClientRect().left
+    const touchY = touch.clientY - gElCanvas.getBoundingClientRect().top
 
-    const selectedLineIdx = getSelectedLineIdx(touchX, touchY);
+    const selectedLineIdx = getSelectedLineIdx(touchX, touchY)
     if (selectedLineIdx !== -1) {
-        selectText(selectedLineIdx);
-        isDragging = true;
-        const meme = getMemes();
-        const line = meme.lines[selectedLineIdx];
-        dragOffsetX = touchX - (line.posX || gElCanvas.width / 3.8); // Calculate offset from text position
-        dragOffsetY = touchY - (line.posY || 30 + selectedLineIdx * (line.size * 1.286)); // Calculate offset from text position
+        selectText(selectedLineIdx)
+        isDragging = true
+        const meme = getMemes()
+        const line = meme.lines[selectedLineIdx]
+        gDragOffsetX = touchX - (line.posX || gElCanvas.width / 3.8)
+        gDragOffsetY = touchY - (line.posY || 30 + selectedLineIdx * (line.size * 1.286))
     }
 }
 
-// Function to handle mouse move event
+
 function onMouseMove(event) {
     if (isDragging) {
-        const mouseX = event.clientX - gElCanvas.getBoundingClientRect().left;
-        const mouseY = event.clientY - gElCanvas.getBoundingClientRect().top;
+        const mouseX = event.clientX - gElCanvas.getBoundingClientRect().left
+        const mouseY = event.clientY - gElCanvas.getBoundingClientRect().top
 
-        const meme = getMemes();
-        const selectedLineIdx = meme.selectedLineIdx;
-        const line = meme.lines[selectedLineIdx];
-        line.posX = mouseX - dragOffsetX; // Update text position based on mouse movement
-        line.posY = mouseY - dragOffsetY;
+        const meme = getMemes()
+        const selectedLineIdx = meme.selectedLineIdx
+        const line = meme.lines[selectedLineIdx]
+        line.posX = mouseX - gDragOffsetX
+        line.posY = mouseY - gDragOffsetY
 
-        renderMeme(); // Redraw the entire meme including text at its updated position
+        renderMeme()
     }
 }
+
 function onTouchMove(event) {
-    event.preventDefault();
+    event.preventDefault()
     if (isDragging) {
-        const touch = event.touches[0];
-        const touchX = touch.clientX - gElCanvas.getBoundingClientRect().left;
-        const touchY = touch.clientY - gElCanvas.getBoundingClientRect().top;
+        const touch = event.touches[0]
+        const touchX = touch.clientX - gElCanvas.getBoundingClientRect().left
+        const touchY = touch.clientY - gElCanvas.getBoundingClientRect().top
 
-        const meme = getMemes();
-        const selectedLineIdx = meme.selectedLineIdx;
-        const line = meme.lines[selectedLineIdx];
-        line.posX = touchX - dragOffsetX;
-        line.posY = touchY - dragOffsetY;
+        const meme = getMemes()
+        const selectedLineIdx = meme.selectedLineIdx
+        const line = meme.lines[selectedLineIdx]
+        line.posX = touchX - gDragOffsetX
+        line.posY = touchY - gDragOffsetY
 
-        renderMeme(); // Redraw the canvas after updating text position
+        renderMeme()
     }
 }
-// Function to handle mouse up event
+
 function onMouseUp(event) {
     isDragging = false
 }
 
-// Function to handle touch end event
+
 function onTouchEnd(event) {
     isDragging = false
 }
 
 function selectText(lineIdx) {
-    const meme = getMemes();
-    meme.selectedLineIdx = lineIdx;
+    const meme = getMemes()
+    meme.selectedLineIdx = lineIdx
 
-    renderMeme();
+    renderMeme()
 
 
     setTimeout(() => {
-        const inputs = document.querySelectorAll('.meme-input');
+        const inputs = document.querySelectorAll('.meme-input')
         inputs.forEach((input, index) => {
             if (index === lineIdx) {
-                input.focus();
+                input.focus()
             } else {
-                input.blur();
+                input.blur()
             }
-        });
-    }, 0);
+        })
+    }, 0)
+}
+
+function addListeners() {
+    gElCanvas.addEventListener('mousedown', onMouseDown)
+    gElCanvas.addEventListener('touchstart', onTouchStart)
+    gElCanvas.addEventListener('mousemove', onMouseMove)
+    gElCanvas.addEventListener('touchmove', onTouchMove)
+    gElCanvas.addEventListener('mouseup', onMouseUp)
+    gElCanvas.addEventListener('touchend', onTouchEnd)
 }
