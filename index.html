@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>MaxiMeme</title>
 
   <link rel="stylesheet" href="css/style.css">
@@ -11,52 +12,58 @@
 </head>
 
 <body onload=" onInit()">
-  <header class="main-header">
-    <div class="logo">MaxiMeme</div>
-    <nav class="links-container clean-anchor">
-      <a href="gallery.html">gallery</a>
-      <a href="#"></a>
-    </nav>
-  </header>
+  <div class="main-layout grid">
 
-  <main class="meme-generator-container flex space-between">
+    <header class="main-header full flex align-center ">
+      <div class="logo">MaxiMeme</div>
+      <nav class="links-container clean-anchor">
+        <ul class="clean-list flex header-links">
+          <li><a class="gallery-link" href="">gallery</a></li>
+          <li><a href="">about</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    <section class="canvas-container">
-      <canvas width="500" height="500"></canvas>
-    </section>
+    <main class="meme-generator-container flex space-between">
 
-    <section class="settings-container">
-
-      <section class="txtline-container">
+      <section class="canvas-container">
+        <canvas width="500" height="500"></canvas>
       </section>
 
-      <section class="button-container">
+      <section class="settings-container">
 
-        <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
-        <button onclick="changeFontSize(3)" class="fontsize-up">fontup</button>
-        <button onclick="changeFontSize(-3)" class="fontsize-down">fontdown</button>
-        <button onclick="onAddTxtLine()" class="addTxt">add line</button>
-        <button onclick="onSwitchLine()" class="fontsize-down">switchline</button>
-        <input oninput="onSetColorTxt(this.value)" class="color-picker" type="color" value="#323522"></input>
+        <section class="txtline-container">
+        </section>
+
+        <section class="button-container">
+
+          <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
+          <button onclick="changeFontSize(3)" class="fontsize-up">fontup</button>
+          <button onclick="changeFontSize(-3)" class="fontsize-down">fontdown</button>
+          <button onclick="onAddTxtLine()" class="addTxt">add line</button>
+          <button onclick="onSwitchLine()" class="fontsize-down">switchline</button>
+          <input oninput="onSetColorTxt(this.value)" class="color-picker" type="color" value="#323522"></input>
+        </section>
       </section>
+
+    </main>
+
+    <section class="gallery flex space-evenly  full flex-wrap">
     </section>
 
-  </main>
+    <footer class="full main-footer grid align-center justify-center">
+      <div class="logo">MaxiMeme</div>
+      <small class="footer-rights">&copy; 2024 MaxiMeme. All rights reserved.</small>
+      <ul class="flex footer-social clean-list">
+        <li><a href="#" class="fa fa-facebook"></a></li>
+        <li><a href="#" class="fa fa-twitter"></a></li>
+        <li><a href="#" class="fa fa-instagram"></a></li>
+        <li><a href="#" class="fa fa-dribbble"></a></li>
+      </ul>
+    </footer>
 
-  <section class="gallery flex space-evenly  full flex-wrap">
-  </section>
 
-  <a href="#">test</a>
-  <footer class="main-footer">
-    <div class="logo"></div>
-    <small class="rights"></small>
-    <nav class="social-links-container">
-      <a href="#"></a>
-      <a href="#"></a>
-      <a href="#"></a>
-    </nav>
-
-  </footer>
+    </footer>
   </div>
 
   <script src="services/util.service.js"></script>

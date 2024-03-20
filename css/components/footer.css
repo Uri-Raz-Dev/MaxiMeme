@@ -1,0 +1,75 @@
+.main-footer {
+ place-items: center;
+ row-gap: 2.375rem;
+ height: 16.6875rem;
+ background-color: goldenrod;
+ color: red;
+}
+
+.main-footer .footer-rights {
+ margin-inline-end: 1rem;
+ font-weight: bolder;
+ font-size: 0.9em;
+}
+
+.main-footer .logo {
+ font-size: 2.5em;
+ font-family: 'eurofurence',
+  sans-serif;
+ font-weight: 300;
+ font-style: normal;
+ width: 5.3125rem;
+ height: 2.0625rem;
+ margin-inline-end: 8rem;
+}
+
+.main-footer .footer-social {
+ gap: 1.875rem;
+}
+
+
+
+.fa {
+ position: relative;
+ padding: 1.25rem;
+ font-size: 1.875rem;
+ width: 2.5rem;
+ height: 2.5rem;
+ text-align: center;
+ text-decoration: none;
+ margin: .3125rem .125rem;
+ background: var(--flash);
+ color: var(--rev-flash);
+ transition: background 0.3s ease, color 0.3s ease;
+}
+
+.fa:hover {
+ opacity: 0.7;
+}
+
+.fa-facebook:hover {
+ background: #3B5998;
+ color: white;
+}
+
+.fa::before {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+}
+
+.fa-twitter:hover {
+ background: #55ACEE;
+ color: white;
+}
+
+.fa-instagram:hover {
+ background: #125688;
+ color: white;
+}
+
+.fa-dribbble:hover {
+ background: #ea4c89;
+ color: white;
+}

@@ -1,0 +1,14 @@
+.main-header {
+ position: relative;
+ width: 100%;
+ background-color: #de2929;
+ padding-right: 1.25em;
+ padding-left: 1.25em;
+ box-shadow: inset 0px -6px 0 var(--flash);
+}
+
+.main-header .logo {
+ font-size: 3rem;
+ font-family: 'Futura Std', sans-serif;
+ flex-grow: 1;
+}
