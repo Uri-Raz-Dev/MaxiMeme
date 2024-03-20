@@ -11,53 +11,60 @@
 </head>
 
 <body onload=" onInit()">
- <header class="main-header">
-  <div class="logo">MaxiMeme</div>
-  <nav class="links-container clean-anchor">
-   <a href="gallery.html">gallery</a>
-   <a href="#"></a>
-  </nav>
- </header>
 
- <main class="meme-generator-container flex space-between">
-  <section class="canvas-container">
-   <canvas width="700" height="800"></canvas>
-  </section>
+ <div class="main-layout grid ">
 
-  <section class="settings-container">
+  <header class="main-header full flex">
 
-   <section class="txtline-container">
+   <a href="" class="logo gallery-link">MaxiMeme</a>
 
+   <nav class="links-container clean-anchor">
+    <a class="gallery-link" href="">gallery</a>
+    <a class="gallery-link" href=""></a>
+   </nav>
+
+  </header>
+
+  <main class="meme-generator-container flex space-between">
+
+   <section class="canvas-container">
+    <canvas width="500" height="500"></canvas>
    </section>
 
-   <section class="button-container">
-    <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
-    <input oninput="colorTxt(this.value)" class="color-picker" type="color" value="#323522"></input>
-    <button onclick="changeFontSize(3)" class="fontsize-up">fontup</button>
-    <button onclick="changeFontSize(-3)" class="fontsize-down">fontdown</button>
-    <button onclick="onAddTxtLine()" class="addTxt">add line</button>
-    <button onclick="onSwitchLine()" class="fontsize-down">switchline</button>
+   <section class="settings-container">
+
+    <section class="txtline-container">
+    </section>
+
+    <section class="button-container">
+
+     <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
+     <button onclick="changeFontSize(3)" class="fontsize-up">fontup</button>
+     <button onclick="changeFontSize(-3)" class="fontsize-down">fontdown</button>
+     <button onclick="onAddTxtLine()" class="addTxt">add line</button>
+     <button onclick="onSwitchLine()" class="fontsize-down">switchline</button>
+     <input oninput="onSetColorTxt(this.value)" class="color-picker" type="color" value="#323522"></input>
+    </section>
    </section>
 
+  </main>
+
+  <section class="gallery flex space-evenly  full flex-wrap">
   </section>
- </main>
 
- <section class="gallery flex space-evenly flex-wrap">
+  <a href="#">test</a>
+  <footer class="main-footer">
+   <div class="logo"></div>
+   <small class="rights"></small>
+   <nav class="social-links-container">
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+   </nav>
 
- </section>
+  </footer>
+ </div>
 
-
- <a href="#">test</a>
-
- <footer class="main-footer">
-  <div class="logo"></div>
-  <small class="rights"></small>
-  <nav class="social-links-container">
-   <a href="#"></a>
-   <a href="#"></a>
-   <a href="#"></a>
-  </nav>
- </footer>
  <script src="services/util.service.js"></script>
  <script src="services/stoarge.service.js"></script>
  <script src="services/gallery.service.js"></script>

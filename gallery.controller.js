@@ -15,3 +15,12 @@ function renderGallery() {
  elGallery.innerHTML = strHtml.join('')
 }
 
+function showGallery() {
+ const elMemeGen = document.querySelector('.meme-generator-container')
+ const elGallery = document.querySelector('.gallery')
+ const elGalleryLink = document.querySelector('.gallery-link')
+
+
+ elMemeGen.style.display = 'none'
+ elGallery.style.display = 'flex'
+}

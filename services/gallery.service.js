@@ -16,7 +16,7 @@ function _createGallery() {
  var [{ id }] = imgGallery
  gImgNum = 2
  id = 2
- for (let index = gImgNum; index <= 25; index++) {
+ for (let index = gImgNum; index <= 24; index++) {
   imgGallery.push({ id: id++, url: `meme-imgs/${gImgNum++}.jpg`, keywords: ['cute', 'funny'] })
  }
 

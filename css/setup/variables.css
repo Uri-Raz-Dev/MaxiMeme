@@ -1,5 +1,7 @@
 :root {
  --primary-color: white;
  --logo-color: black;
- --bg-color: grey;
+ --bg-color: linear-gradient(155deg, #de2929 0%, #FFD700 100%);
+ --flash: #FF0000;
+ --rev-flash: #FFD700;
 }
