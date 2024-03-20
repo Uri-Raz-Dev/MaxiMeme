@@ -2,50 +2,44 @@
 <html lang="en">
 
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>MaxiMeme</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MaxiMeme</title>
 
- <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body onload=" onInit()">
-
- <div class="main-layout  ">
-
-  <header class="main-header full flex">
-
-   <a href="" class="logo gallery-link">MaxiMeme</a>
-
-   <nav class="links-container clean-anchor">
-    <a class="gallery-link" href="">gallery</a>
-    <a class="gallery-link" href=""></a>
-   </nav>
-
+  <header class="main-header">
+    <div class="logo">MaxiMeme</div>
+    <nav class="links-container clean-anchor">
+      <a href="gallery.html">gallery</a>
+      <a href="#"></a>
+    </nav>
   </header>
 
   <main class="meme-generator-container flex space-between">
 
-   <section class="canvas-container">
-    <canvas width="500" height="500"></canvas>
-   </section>
-
-   <section class="settings-container">
-
-    <section class="txtline-container">
+    <section class="canvas-container">
+      <canvas width="500" height="500"></canvas>
     </section>
 
-    <section class="button-container">
+    <section class="settings-container">
 
-     <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
-     <button onclick="changeFontSize(3)" class="fontsize-up">fontup</button>
-     <button onclick="changeFontSize(-3)" class="fontsize-down">fontdown</button>
-     <button onclick="onAddTxtLine()" class="addTxt">add line</button>
-     <button onclick="onSwitchLine()" class="fontsize-down">switchline</button>
-     <input oninput="onSetColorTxt(this.value)" class="color-picker" type="color" value="#323522"></input>
+      <section class="txtline-container">
+      </section>
+
+      <section class="button-container">
+
+        <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
+        <button onclick="changeFontSize(3)" class="fontsize-up">fontup</button>
+        <button onclick="changeFontSize(-3)" class="fontsize-down">fontdown</button>
+        <button onclick="onAddTxtLine()" class="addTxt">add line</button>
+        <button onclick="onSwitchLine()" class="fontsize-down">switchline</button>
+        <input oninput="onSetColorTxt(this.value)" class="color-picker" type="color" value="#323522"></input>
+      </section>
     </section>
-   </section>
 
   </main>
 
@@ -54,24 +48,24 @@
 
   <a href="#">test</a>
   <footer class="main-footer">
-   <div class="logo"></div>
-   <small class="rights"></small>
-   <nav class="social-links-container">
-    <a href="#"></a>
-    <a href="#"></a>
-    <a href="#"></a>
-   </nav>
+    <div class="logo"></div>
+    <small class="rights"></small>
+    <nav class="social-links-container">
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+    </nav>
 
   </footer>
- </div>
+  </div>
 
- <script src="services/util.service.js"></script>
- <script src="services/stoarge.service.js"></script>
- <script src="services/gallery.service.js"></script>
- <script src="services/meme.service.js"></script>
+  <script src="services/util.service.js"></script>
+  <script src="services/stoarge.service.js"></script>
+  <script src="services/gallery.service.js"></script>
+  <script src="services/meme.service.js"></script>
 
- <script src="gallery.controller.js"></script>
- <script src="meme.controller.js"></script>
+  <script src="gallery.controller.js"></script>
+  <script src="meme.controller.js"></script>
 
 
 </body>
