@@ -9,6 +9,6 @@
 
 .main-header .logo {
  font-size: 3rem;
- font-family: 'Futura Std', sans-serif;
  flex-grow: 1;
+ color: var(--rev-flash);
 }

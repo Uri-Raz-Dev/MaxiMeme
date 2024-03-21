@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.cdnfonts.com/css/lightning" rel="stylesheet">
   <title>MaxiMeme</title>
 
   <link rel="stylesheet" href="css/style.css">
@@ -12,7 +14,7 @@
 </head>
 
 <body onload=" onInit()">
-  <div class="main-layout grid">
+  <div class="main-layout grid ">
 
     <header class="main-header full flex align-center ">
       <div class="logo">MaxiMeme</div>
@@ -24,26 +26,30 @@
       </nav>
     </header>
 
-    <main class="meme-generator-container flex space-between">
+    <main class="meme-generator-container">
 
-      <section class="canvas-container">
-        <canvas width="500" height="500"></canvas>
+      <section class="canvas-container ">
+        <canvas width="500" height="600"></canvas>
       </section>
 
-      <section class="settings-container">
+      <section class="settings-container ">
 
-        <section class="txtline-container">
+        <section class="txtline-container ">
         </section>
 
-        <section class="button-container">
+        <section class="button-container flex flex-wrap ">
 
-          <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
-          <button onclick="changeFontSize(3)" class="fontsize-up">fontup</button>
-          <button onclick="changeFontSize(-3)" class="fontsize-down">fontdown</button>
-          <button onclick="onAddTxtLine()" class="addTxt">add line</button>
-          <button onclick="onSwitchLine()" class="fontsize-down">switchline</button>
-          <input oninput="onSetColorTxt(this.value)" class="color-picker" type="color" value="#323522"></input>
+          <a href="#" onclick="downloadCanvas(this)" download="file-name" class="comic-bubble">DOWNLOAD</a>
+          <button onclick="changeFontSize(3)" class="fontsize-up comic-bubble"><span class='bx bx-font'></span><span
+              class='bx bx-up-arrow-alt'></span></button>
+          <button onclick="changeFontSize(-3)" class="fontsize-down comic-bubble"><span class='bx bx-font'></span><span
+              class='bx bx-down-arrow-alt'></span></button>
+          <button onclick="onAddTxtLine()" class="addTxt comic-bubble"><span class='bx bx-list-plus'></span></button>
+          <button onclick="onSwitchLine()" class="fontsize-down comic-bubble"><span class='bx bx-list-ul'></span> <span
+              class='bx bx-down-arrow-alt'></span></button>
+          <input oninput="onSetColorTxt(this.value)" class="color-picker " type="color" value="#323522"></input>
         </section>
+
       </section>
 
     </main>

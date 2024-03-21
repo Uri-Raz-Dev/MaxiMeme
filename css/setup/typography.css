@@ -1,4 +1,9 @@
 @font-face {
- font-family: 'Futura Std', sans-serif;
- src: url('https://fonts.cdnfonts.com/css/futura-std-4');
+ font-family: 'Sharp', sans-serif;
+ src: url('https://fonts.cdnfonts.com/css/sharp');
+}
+
+@font-face {
+ font-family: 'Lightning', sans-serif;
+ src: url('https://fonts.cdnfonts.com/css/lightning');
 }

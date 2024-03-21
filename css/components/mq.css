@@ -1,13 +1,44 @@
-@media (max-width:910px) {
+@media (max-width:940px) {
  img {
   height: 150px;
   width: 150px;
  }
+
+ canvas {
+  width: 350px;
+  height: 600px;
+ }
+
+ .canvas-container {
+  position: relative;
+  width: 60vw;
+ }
 }
+
+
 
 @media (max-width:500px) {
  img {
   height: 100px;
   width: 100px;
+ }
+
+
+}
+
+
+@media (max-width:700px) {
+ canvas {
+  width: 150px;
+  height: 600px;
+ }
+
+ .canvas-container {
+  position: relative;
+  width: 50vw;
+ }
+
+ .settings-container {
+  width: 150px;
  }
 }
