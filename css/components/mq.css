@@ -17,6 +17,24 @@
  }
 
 
+ @media (max-width:940px) {
+  img {
+   height: 150px;
+   width: 150px;
+  }
+
+  canvas {
+   width: 350px;
+   height: 600px;
+  }
+
+  .canvas-container {
+   position: relative;
+   width: 60vw;
+  }
+ }
+
+
 
  canvas {
   width: 350px;
