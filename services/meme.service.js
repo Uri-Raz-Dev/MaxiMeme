@@ -7,8 +7,9 @@ var gMeme = {
   lines: [
     {
       txt: 'Enter text here',
-      size: 30,
+      size: 28,
       color: 'black',
+      fontFamily: 'Arial'
     }
 
   ],

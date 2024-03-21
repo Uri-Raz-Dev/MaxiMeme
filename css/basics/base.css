@@ -13,7 +13,7 @@ body {
  padding: 0;
  margin: 0;
  min-height: 100dvh;
- font-family: Tahoma,
+ font-family: "Comic Sans MS",
   sans-serif;
  color: var(--primary-color);
  background: var(--bg-color);
@@ -31,19 +31,15 @@ a {
  display: none;
 }
 
-button {
- display: block;
-}
+
 
 .canvas-container {
  position: relative;
- width: 70vw;
+ width: 50vw;
  margin-inline-start: 20px;
 }
 
-input {
- display: block;
-}
+
 
 a,
 button:hover {

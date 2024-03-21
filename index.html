@@ -26,28 +26,83 @@
       </nav>
     </header>
 
-    <main class="meme-generator-container">
+    <main class="meme-generator-container ">
 
       <section class="canvas-container ">
         <canvas width="500" height="600"></canvas>
       </section>
 
-      <section class="settings-container ">
+      <section class="settings-container  ">
 
-        <section class="txtline-container ">
+        <section class="txtline-container  ">
         </section>
 
-        <section class="button-container flex flex-wrap ">
+        <section class="button-container ">
 
-          <a href="#" onclick="downloadCanvas(this)" download="file-name" class="comic-bubble">DOWNLOAD</a>
+
+          <select id="fontSizeSelect" onchange="changeFontSizeSelect(this.value)">
+            <option value="12">12px</option>
+            <option value="16">16px</option>
+            <option value="20">20px</option>
+            <option value="24">24px</option>
+            <option value="28">28px</option>
+            <option value="32">32px</option>
+            <option value="36">36px</option>
+            <option value="40">40px</option>
+            <option value="44">44px</option>
+            <option value="48">48px</option>
+            <option value="52">52px</option>
+          </select>
+
+
+
+
           <button onclick="changeFontSize(3)" class="fontsize-up comic-bubble"><span class='bx bx-font'></span><span
               class='bx bx-up-arrow-alt'></span></button>
+
           <button onclick="changeFontSize(-3)" class="fontsize-down comic-bubble"><span class='bx bx-font'></span><span
               class='bx bx-down-arrow-alt'></span></button>
+          <select id="fontFamilySelect" onchange="changeFontFamilySelect(this.value)">
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Helvetica, sans-serif">Helvetica</option>
+            <option value="Times New Roman, serif">Times New Roman</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="Courier New, monospace">Courier New</option>
+            <option value="Verdana, sans-serif">Verdana</option>
+            <option value="Geneva, sans-serif">Geneva</option>
+            <option value="Arial Black, sans-serif">Arial Black</option>
+            <option value="Impact, sans-serif">Impact</option>
+            <option value="Comic Sans MS, cursive">Comic Sans MS</option>
+          </select>
+
+
           <button onclick="onAddTxtLine()" class="addTxt comic-bubble"><span class='bx bx-list-plus'></span></button>
+
           <button onclick="onSwitchLine()" class="fontsize-down comic-bubble"><span class='bx bx-list-ul'></span> <span
               class='bx bx-down-arrow-alt'></span></button>
           <input oninput="onSetColorTxt(this.value)" class="color-picker " type="color" value="#323522"></input>
+
+          <button onclick="alignTextLeft()" class="addTxt comic-bubble"><i class='bx bx-align-left'></i></span></button>
+
+          <button onclick="alignTextCenter()" class="addTxt comic-bubble"><i
+              class='bx bx-align-middle'></i></span></button>
+
+          <button onclick="alignTextRight()" class="addTxt comic-bubble"><i class='bx bx-align-right'></i></button>
+
+          <button onclick="alignTextRight()" class="addTxt comic-bubble">up</button>
+          <button onclick="alignTextRight()" class="addTxt comic-bubble">down</button>
+
+
+
+
+
+        </section>
+
+        <section class="bottom-button-container">
+          <a href="#" onclick="downloadCanvas(this)" download="file-name" class="comic-bubble">DOWNLOAD</a>
+          <a href="#" onclick="downloadCanvas(this)" download="file-name" class="comic-bubble">SHARE</a>
+          <a href="#" onclick="downloadCanvas(this)" download="file-name" class="comic-bubble">UPLOAD</a>
+
         </section>
 
       </section>

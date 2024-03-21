@@ -69,10 +69,10 @@ function drawText() {
     const meme = getMemes()
     const lines = meme.lines
     lines.forEach((line, index) => {
-        const { txt, size, color, posX, posY } = line
+        const { txt, size, color, posX, posY, fontFamily } = line
         let fontSize = size
 
-        gCtx.font = `${fontSize}px Thomas`
+        gCtx.font = `${fontSize}px ${fontFamily}`
         let textWidth = gCtx.measureText(txt).width
         let lineHeight = fontSize * 1.286
 
@@ -83,9 +83,17 @@ function drawText() {
         gCtx.textBaseline = 'top'
         gCtx.fillStyle = color
 
+        const gradient = gCtx.createLinearGradient(x, y, x + textWidth, y + lineHeight);
+        gradient.addColorStop(0, 'red')
+        gradient.addColorStop(1, 'yellow')
+
+        gCtx.strokeStyle = gradient;
+
+
         if (txt.trim() !== '') {
             if (index === meme.selectedLineIdx) {
-                gCtx.strokeStyle = 'yellow'
+                gCtx.strokeStyle = gradient;
+
                 gCtx.strokeRect(x, y, textWidth, lineHeight)
             } else {
                 gCtx.strokeStyle = 'transparent'
@@ -213,9 +221,9 @@ function getSelectedLineIdx(x, y) {
     const meme = getMemes()
     const lines = meme.lines
     for (let i = 0; i < lines.length; i++) {
-        const { txt, size, color, posX, posY } = lines[i]
+        const { txt, size, color, posX, posY, fontFamily } = lines[i]
         let fontSize = size
-        gCtx.font = `${fontSize}px Arial`
+        gCtx.font = `${fontSize}px ${fontFamily}`
         let textWidth = gCtx.measureText(txt).width
         let lineHeight = fontSize * 1.286
 
@@ -325,6 +333,107 @@ function selectText(lineIdx) {
         })
     }, 0)
 }
+
+
+function alignTextLeft() {
+    const meme = getMemes()
+    const selectedLineIdx = meme.selectedLineIdx
+    if (selectedLineIdx !== -1) {
+        meme.lines[selectedLineIdx].posX = 10
+    }
+    renderMeme()
+}
+
+function alignTextRight() {
+    const meme = getMemes()
+    const selectedLineIdx = meme.selectedLineIdx
+    if (selectedLineIdx !== -1) {
+        const canvasWidth = gElCanvas.width
+        const { txt, size } = meme.lines[selectedLineIdx]
+        const textWidth = gCtx.measureText(txt).width
+        meme.lines[selectedLineIdx].posX = canvasWidth - textWidth - 10
+        renderMeme()
+    }
+}
+
+function alignTextCenter() {
+    const meme = getMemes()
+    const selectedLineIdx = meme.selectedLineIdx
+    if (selectedLineIdx !== -1) {
+        const canvasWidth = gElCanvas.width
+        const { txt, size } = meme.lines[selectedLineIdx]
+        const textWidth = gCtx.measureText(txt).width
+        meme.lines[selectedLineIdx].posX = (canvasWidth - textWidth) / 2
+        renderMeme()
+    }
+}
+
+
+function moveTextUp() {
+    const meme = getMemes()
+    const selectedLineIdx = meme.selectedLineIdx
+    if (selectedLineIdx !== -1) {
+        meme.lines[selectedLineIdx].posY -= 10
+
+        meme.lines[selectedLineIdx].posY = Math.max(meme.lines[selectedLineIdx].posY, 0)
+        renderMeme()
+    }
+}
+
+function moveTextDown() {
+    const meme = getMemes()
+    const selectedLineIdx = meme.selectedLineIdx
+    if (selectedLineIdx !== -1) {
+        const canvasHeight = gElCanvas.height
+        const { txt, size } = meme.lines[selectedLineIdx]
+        const lineHeight = size * 1.286
+        const textHeight = lineHeight
+        const maxY = canvasHeight - textHeight
+        meme.lines[selectedLineIdx].posY += 10
+
+        meme.lines[selectedLineIdx].posY = Math.min(meme.lines[selectedLineIdx].posY, maxY)
+        renderMeme();
+    }
+}
+
+
+function onChangeFontFamily(fontFamily, lineIdx) {
+    const meme = getMemes();
+    const selectedLineIdx = lineIdx || meme.selectedLineIdx;
+    if (selectedLineIdx !== -1) {
+        meme.lines[selectedLineIdx].fontFamily = fontFamily;
+        renderMeme();
+    }
+}
+
+function onChangeFontSize(fontSize, lineIdx) {
+    const meme = getMemes();
+    const selectedLineIdx = lineIdx || meme.selectedLineIdx;
+    if (selectedLineIdx !== -1) {
+        meme.lines[selectedLineIdx].size = parseInt(fontSize);
+        renderMeme();
+    }
+}
+
+
+function changeFontSizeSelect(fontSize) {
+    const meme = getMemes();
+    const selectedLineIdx = meme.selectedLineIdx;
+    if (selectedLineIdx !== -1) {
+        meme.lines[selectedLineIdx].size = parseInt(fontSize);
+        renderMeme();
+    }
+}
+
+function changeFontFamilySelect(fontFamily) {
+    const meme = getMemes();
+    const selectedLineIdx = meme.selectedLineIdx;
+    if (selectedLineIdx !== -1) {
+        meme.lines[selectedLineIdx].fontFamily = fontFamily;
+        renderMeme();
+    }
+}
+
 
 function addListeners() {
     gElCanvas.addEventListener('mousedown', onMouseDown)
