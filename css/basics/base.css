@@ -37,7 +37,8 @@ button {
 
 .canvas-container {
  position: relative;
- width: 80vw;
+ width: 70vw;
+ margin-inline-start: 20px;
 }
 
 input {
@@ -52,4 +53,9 @@ button:hover {
 img {
  width: 300px;
  height: 300px;
+ margin-block-end: 20px;
+}
+
+.logo {
+ font-family: 'Lightning', sans-serif;
 }

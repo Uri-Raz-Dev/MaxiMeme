@@ -14,7 +14,6 @@
  color: var(--rev-flash);
  transition: 0.6s ease-in;
  box-shadow: inset 0px -6px 0 var(--rev-flash);
- /* transition: border-bottom 0.3s ease-out; */
 }
 
 .header-links .gallery-link {

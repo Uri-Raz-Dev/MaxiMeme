@@ -1,1 +1,54 @@
-/* gallery main */
+.comic-bubble {
+ position: relative;
+ padding: .625em 1.25em;
+ background: linear-gradient(45deg, #525252, #838383, #525252);
+ color: #fff;
+ font-family: Arial, sans-serif;
+ font-size: 1em;
+ border-radius: 1.25rem;
+ text-decoration: none;
+}
+
+
+
+.comic-bubble:hover {
+ background-color: #2d4473;
+}
+
+.color-picker {
+ background: linear-gradient(45deg, #525252, #838383, #525252);
+}
+
+.button-container {
+ gap: .625rem;
+}
+
+.button-container>* {
+ flex: 1 0 21%;
+ margin-block-end: 3.125rem;
+ background-color: blue;
+}
+
+.settings-container {
+ border-radius: 10px;
+ background: linear-gradient(to bottom, #8B4513, #CD853F);
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.meme-input {
+ margin-block-end: 20px;
+}
+
+.delete-btn {
+ width: 200px;
+ height: 20px;
+ font-size: 20px;
+ color: red;
+ font-weight: bolder;
+ text-decoration: none;
+ cursor: pointer;
+}
+
+.button-container button {
+ border: none;
+}

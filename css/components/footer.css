@@ -1,7 +1,7 @@
 .main-footer {
  place-items: center;
+ margin-top: auto;
  row-gap: 2.375rem;
- height: 16.6875rem;
  background-color: goldenrod;
  color: red;
 }
@@ -13,9 +13,9 @@
 }
 
 .main-footer .logo {
+
  font-size: 2.5em;
- font-family: 'eurofurence',
-  sans-serif;
+
  font-weight: 300;
  font-style: normal;
  width: 5.3125rem;

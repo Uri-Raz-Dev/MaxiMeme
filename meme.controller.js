@@ -24,10 +24,12 @@ function renderSettings() {
     const meme = getMemes()
     const strHtml = meme.lines.map((line, idx) => {
         return `
-        <input oninput = "onUpdateTxt(this.value)" onclick="onLineSelect(${idx})" data-id="${idx}" id="txt" class="meme-input" placeholder="Text #${idx + 1}" type="text">
+        <div class="line-container">
         <a class="delete-btn" onclick="onDeleteTxtLine(${idx})">x</a>
+        <input oninput = "onUpdateTxt(this.value)" onclick="onLineSelect(${idx})" data-id="${idx}" id="txt" class="meme-input" placeholder="Text #${idx + 1}" type="text">
 
-        </input>`
+        </input>
+        </div>`
     })
     elSettingsContainer.innerHTML = strHtml.join('')
 }
@@ -69,7 +71,7 @@ function drawText() {
         const { txt, size, color, posX, posY } = line
         let fontSize = size
 
-        gCtx.font = `${fontSize}px Arial`
+        gCtx.font = `${fontSize}px Thomas`
         let textWidth = gCtx.measureText(txt).width
         let lineHeight = fontSize * 1.286
 
@@ -159,17 +161,18 @@ function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
+
 function downloadCanvas(elLink) {
 
     elLink.download = 'my-img'
 
     const dataUrl = gElCanvas.toDataURL()
+    elLink.href = dataUrl
+
     const meme = getMemes()
     meme.selectedLineIdx = -1
     renderMeme()
 }
-
-
 
 function onAddTxtLine() {
     addTxtLine()
