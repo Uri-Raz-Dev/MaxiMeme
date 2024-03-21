@@ -61,7 +61,7 @@
 
 @media (max-width:700px) {
  canvas {
-  width: 200px;
+  width: 300px;
   height: 600px;
  }
 
@@ -71,6 +71,6 @@
  }
 
  .settings-container {
-  width: 200px;
+  width: 300px;
  }
 }
