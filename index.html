@@ -18,7 +18,7 @@
   <div class="main-layout grid">
 
     <header class="main-header full flex align-center ">
-      <div class="logo">MaxiMeme</div>
+      <a href="#" class="logo">MaxiMeme</a>
       <nav class="links-container clean-anchor">
         <ul class="clean-list flex header-links">
           <li><a class="gallery-link" href="">gallery</a></li>
@@ -26,6 +26,7 @@
         </ul>
       </nav>
     </header>
+    <h1>CHOOSE AN IMAGE</h1>
 
     <main class="meme-generator-container">
 
@@ -64,7 +65,8 @@
           <button onclick="decFontSize(-3)" class="fontsize-down comic-bubble"><span class='bx bx-font'></span><span
               class='bx bx-down-arrow-alt'></span></button>
           <select id="font-family-select" onchange="changeFontFamilySelect(this.value)">
-            <option selected value="Arial, sans-serif">Arial</option>
+            <option selected value="Impact, sans-serif">Impact</option>
+            <option value="Arial, sans-serif">Arial</option>
             <option value="Helvetica, sans-serif">Helvetica</option>
             <option value="Times New Roman, serif">Times New Roman</option>
             <option value="Georgia, serif">Georgia</option>
@@ -81,7 +83,7 @@
 
           <button onclick="onSwitchLine()" class="fontsize-down comic-bubble"><span class='bx bx-list-ul'></span> <span
               class='bx bx-down-arrow-alt'></span></button>
-          <input oninput="onSetColorTxt(this.value)" class="color-picker " type="color" value="#323522"></input>
+          <input oninput="onSetColorTxt(this.value)" class="color-picker " type="color" value="#000000"></input>
 
           <button onclick="moveTextUp()" class="addTxt comic-bubble">up</button>
 
@@ -116,7 +118,7 @@
     </section>
 
     <footer class="full main-footer grid align-center justify-center">
-      <div class="logo">MaxiMeme</div>
+      <a href="#" class="logo">MaxiMeme</a>
       <small class="footer-rights">&copy; 2024 MaxiMeme. All rights reserved.</small>
       <ul class="flex footer-social clean-list">
         <li><a href="#" class="fa fa-facebook"></a></li>

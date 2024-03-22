@@ -1,51 +1,25 @@
-@media (max-width:940px) {
+@media (max-width:1160px) {
  img {
   height: 150px;
   width: 150px;
  }
 
 
-}
 
-@media (max-width:1175px) {
- .meme-generator-container {
-  column-gap: 0;
- }
-
- /* .meme-generator-container {
-  grid-template-columns: 1fr;
- } */
 
 
 }
 
-@media (max-width:975px) {
 
 
+
+
+
+@media (max-width:870px) {
  .meme-generator-container {
   grid-template-columns: 1fr;
  }
 
- .txtline-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 10px;
- }
-
-
-
-}
-
-
-
-
-
-
-@media (max-width:500px) {
- img {
-  height: 100px;
-  width: 100px;
- }
 
 
 }

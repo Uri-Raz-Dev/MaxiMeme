@@ -19,6 +19,7 @@ function onInit() {
 }
 
 
+
 function renderSettings() {
     const elSettingsContainer = document.querySelector('.txtline-container')
 
@@ -30,13 +31,14 @@ function renderSettings() {
         return `
         <div class="line-container">
         <a class="delete-btn" onclick="onDeleteTxtLine(${idx})">x</a>
-        <input oninput = "onUpdateTxt(this.value)" onclick="onLineSelect(${idx})" maxlength="24" data-id="${idx}" id="txt" class="meme-input" placeholder="Text#${idx + 1}" type="text" value="${line.txt}">
+        <input oninput = "onUpdateTxt(this.value)" onclick="onLineSelect(${idx})" maxlength="24" data-id="${idx}" id="txt" class="meme-input" placeholder="Text#${idx + 1}" type="text" >
 
         </input>
         </div>`
     })
     elSettingsContainer.innerHTML = strHtml.join('')
 }
+
 
 
 

@@ -51,7 +51,7 @@ function addTxtLine() {
     txt: 'Enter Text Here',
     size: 32,
     color: 'black',
-    fontFamily: 'Arial',
+    fontFamily: 'Impact',
 
   })
   return lines

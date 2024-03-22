@@ -18,7 +18,6 @@ function renderGallery() {
 function showGallery() {
  const elMemeGen = document.querySelector('.meme-generator-container')
  const elGallery = document.querySelector('.gallery')
- const elGalleryLink = document.querySelector('.gallery-link')
 
 
  elMemeGen.style.display = 'none'

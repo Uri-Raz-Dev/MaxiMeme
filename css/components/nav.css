@@ -1,4 +1,4 @@
-.main-header a {
+.main-header a:not(.logo) {
  display: flex;
  align-items: center;
  justify-content: center;
@@ -10,7 +10,7 @@
  border-right: solid 2px var(--rev-flash);
 }
 
-.main-header a:hover {
+.main-header a:hover:not(.logo) {
  color: var(--rev-flash);
  transition: 0.6s ease-in;
  box-shadow: inset 0px -6px 0 var(--rev-flash);
