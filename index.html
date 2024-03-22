@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href="https://fonts.cdnfonts.com/css/lightning" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/impact" rel="stylesheet">
   <title>MaxiMeme</title>
 
   <link rel="stylesheet" href="css/style.css">
@@ -14,7 +15,7 @@
 </head>
 
 <body onload=" onInit()">
-  <div class="main-layout grid ">
+  <div class="main-layout grid">
 
     <header class="main-header full flex align-center ">
       <div class="logo">MaxiMeme</div>
@@ -26,10 +27,10 @@
       </nav>
     </header>
 
-    <main class="meme-generator-container ">
+    <main class="meme-generator-container">
 
       <section class="canvas-container ">
-        <canvas width="500" height="600"></canvas>
+        <canvas height="600px" width="500px"></canvas>
       </section>
 
       <section class="settings-container  ">
@@ -40,13 +41,13 @@
         <section class="button-container ">
 
 
-          <select id="fontSizeSelect" onchange="changeFontSizeSelect(this.value)">
+          <select id="font-size-select" onchange="changeFontSizeSelect(this.value)">
             <option value="12">12px</option>
             <option value="16">16px</option>
             <option value="20">20px</option>
             <option value="24">24px</option>
             <option value="28">28px</option>
-            <option value="32">32px</option>
+            <option selected value="32">32px</option>
             <option value="36">36px</option>
             <option value="40">40px</option>
             <option value="44">44px</option>
@@ -57,13 +58,13 @@
 
 
 
-          <button onclick="changeFontSize(3)" class="fontsize-up comic-bubble"><span class='bx bx-font'></span><span
+          <button onclick="incFontSize(3)" class="fontsize-up comic-bubble"><span class='bx bx-font'></span><span
               class='bx bx-up-arrow-alt'></span></button>
 
-          <button onclick="changeFontSize(-3)" class="fontsize-down comic-bubble"><span class='bx bx-font'></span><span
+          <button onclick="decFontSize(-3)" class="fontsize-down comic-bubble"><span class='bx bx-font'></span><span
               class='bx bx-down-arrow-alt'></span></button>
-          <select id="fontFamilySelect" onchange="changeFontFamilySelect(this.value)">
-            <option value="Arial, sans-serif">Arial</option>
+          <select id="font-family-select" onchange="changeFontFamilySelect(this.value)">
+            <option selected value="Arial, sans-serif">Arial</option>
             <option value="Helvetica, sans-serif">Helvetica</option>
             <option value="Times New Roman, serif">Times New Roman</option>
             <option value="Georgia, serif">Georgia</option>
@@ -82,6 +83,10 @@
               class='bx bx-down-arrow-alt'></span></button>
           <input oninput="onSetColorTxt(this.value)" class="color-picker " type="color" value="#323522"></input>
 
+          <button onclick="moveTextUp()" class="addTxt comic-bubble">up</button>
+
+          <button onclick="moveTextDown()" class="addTxt comic-bubble">down</button>
+
           <button onclick="alignTextLeft()" class="addTxt comic-bubble"><i class='bx bx-align-left'></i></span></button>
 
           <button onclick="alignTextCenter()" class="addTxt comic-bubble"><i
@@ -89,8 +94,6 @@
 
           <button onclick="alignTextRight()" class="addTxt comic-bubble"><i class='bx bx-align-right'></i></button>
 
-          <button onclick="alignTextRight()" class="addTxt comic-bubble">up</button>
-          <button onclick="alignTextRight()" class="addTxt comic-bubble">down</button>
 
 
 
@@ -100,11 +103,11 @@
 
         <section class="bottom-button-container">
           <a href="#" onclick="downloadCanvas(this)" download="file-name" class="comic-bubble">DOWNLOAD</a>
-          <a href="#" onclick="downloadCanvas(this)" download="file-name" class="comic-bubble">SHARE</a>
-          <a href="#" onclick="downloadCanvas(this)" download="file-name" class="comic-bubble">UPLOAD</a>
-
+          <a href="#" onclick="onUploadImg()" class="comic-bubble">SHARE</a>
+          <label for="file-input" class="custom-file-input comic-bubble">UPLOAD
+            <input type="file" id="file-input" name="image" onchange="onImgInput()" accept="image/*" />
+          </label>
         </section>
-
       </section>
 
     </main>

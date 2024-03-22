@@ -1,15 +1,16 @@
 'use strict'
 const STOARGE_KEY = 'memesDB'
-
 var gMeme = {
   selectedImgId: 21,
   selectedLineIdx: 0,
   lines: [
     {
-      txt: 'Enter text here',
-      size: 28,
+      txt: 'Enter Text Here',
+      size: 32,
       color: 'black',
-      fontFamily: 'Arial'
+      fontFamily: 'Impact',
+      posX: 0,
+      posY: 0,
     }
 
   ],
@@ -47,15 +48,18 @@ function addTxtLine() {
   const { lines } = gMeme
   if (lines.length >= 10) return
   lines.push({
-    txt: 'Enter text here',
-    size: 30,
+    txt: 'Enter Text Here',
+    size: 32,
     color: 'black',
+    fontFamily: 'Arial',
+
   })
   return lines
 }
 
 function deleteTxtLine(idx) {
   const { lines } = gMeme
+  if (lines.length <= 1) return
   lines.splice(idx, 1)
 
   return lines

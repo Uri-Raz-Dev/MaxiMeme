@@ -21,12 +21,16 @@ function onInit() {
 
 function renderSettings() {
     const elSettingsContainer = document.querySelector('.txtline-container')
+
     const meme = getMemes()
+
+
     const strHtml = meme.lines.map((line, idx) => {
+
         return `
         <div class="line-container">
         <a class="delete-btn" onclick="onDeleteTxtLine(${idx})">x</a>
-        <input oninput = "onUpdateTxt(this.value)" onclick="onLineSelect(${idx})" data-id="${idx}" id="txt" class="meme-input" placeholder="Text #${idx + 1}" type="text">
+        <input oninput = "onUpdateTxt(this.value)" onclick="onLineSelect(${idx})" maxlength="24" data-id="${idx}" id="txt" class="meme-input" placeholder="Text#${idx + 1}" type="text" value="${line.txt}">
 
         </input>
         </div>`
@@ -111,14 +115,20 @@ function onSetColorTxt(elColor) {
     renderMeme()
 }
 
-function changeFontSize(elValue) {
+function incFontSize(elValue) {
     const meme = getMemes()
+    if (meme.lines[meme.selectedLineIdx].size >= 70) return
+    if (elValue >= 3) meme.lines[meme.selectedLineIdx].size += elValue
 
-    if (elValue >= 3) {
-        meme.lines[meme.selectedLineIdx].size += elValue
-    } else if (elValue <= 3) {
-        meme.lines[meme.selectedLineIdx].size -= Math.abs(elValue)
-    }
+
+    renderMeme()
+}
+function decFontSize(elValue) {
+    const meme = getMemes()
+    if (meme.lines[meme.selectedLineIdx].size <= 12) return
+
+    if (elValue <= 3) meme.lines[meme.selectedLineIdx].size -= Math.abs(elValue)
+
 
     renderMeme()
 }
@@ -132,17 +142,17 @@ function onDeleteTxtLine(idx) {
     const elDeleteBtn = document.querySelectorAll('.delete-btn')[idx]
 
     deleteTxtLine(idx)
-    elTxtLine.classList.add('hidden');
-    elDeleteBtn.classList.add('hidden');
+    elTxtLine.classList.add('hidden')
+    elDeleteBtn.classList.add('hidden')
     renderSettings()
-    renderMeme();
+    renderMeme()
 }
 function onImgSelect(id) {
     const elMemeGen = document.querySelector('.meme-generator-container')
     const elGallery = document.querySelector('.gallery')
 
 
-    elMemeGen.style.display = 'flex'
+    elMemeGen.style.display = 'grid'
     elGallery.style.display = 'none'
 
     setImg(id)
@@ -184,6 +194,7 @@ function downloadCanvas(elLink) {
 }
 
 function onAddTxtLine() {
+
     addTxtLine()
     renderSettings()
     renderMeme()
@@ -370,32 +381,31 @@ function alignTextCenter() {
 
 
 function moveTextUp() {
-    const meme = getMemes()
-    const selectedLineIdx = meme.selectedLineIdx
+    const meme = getMemes();
+    const selectedLineIdx = meme.selectedLineIdx;
     if (selectedLineIdx !== -1) {
-        meme.lines[selectedLineIdx].posY -= 10
+        meme.lines[selectedLineIdx].posY -= 10;
 
-        meme.lines[selectedLineIdx].posY = Math.max(meme.lines[selectedLineIdx].posY, 0)
-        renderMeme()
-    }
-}
-
-function moveTextDown() {
-    const meme = getMemes()
-    const selectedLineIdx = meme.selectedLineIdx
-    if (selectedLineIdx !== -1) {
-        const canvasHeight = gElCanvas.height
-        const { txt, size } = meme.lines[selectedLineIdx]
-        const lineHeight = size * 1.286
-        const textHeight = lineHeight
-        const maxY = canvasHeight - textHeight
-        meme.lines[selectedLineIdx].posY += 10
-
-        meme.lines[selectedLineIdx].posY = Math.min(meme.lines[selectedLineIdx].posY, maxY)
+        meme.lines[selectedLineIdx].posY = Math.max(meme.lines[selectedLineIdx].posY, 0);
         renderMeme();
     }
 }
 
+function moveTextDown() {
+    const meme = getMemes();
+    const selectedLineIdx = meme.selectedLineIdx;
+    if (selectedLineIdx !== -1) {
+        const canvasHeight = gElCanvas.height;
+        const { txt, size } = meme.lines[selectedLineIdx];
+        const lineHeight = size * 1.286;
+        const textHeight = lineHeight;
+        const maxY = canvasHeight - textHeight;
+        meme.lines[selectedLineIdx].posY += 10;
+
+        meme.lines[selectedLineIdx].posY = Math.min(meme.lines[selectedLineIdx].posY, maxY);
+        renderMeme();
+    }
+}
 
 function onChangeFontFamily(fontFamily, lineIdx) {
     const meme = getMemes();
@@ -433,6 +443,62 @@ function changeFontFamilySelect(fontFamily) {
         renderMeme();
     }
 }
+
+function onUploadImg() {
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg')
+
+    function onSuccess(uploadedImgUrl) {
+        const url = encodeURIComponent(uploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
+    }
+
+    doUploadImg(imgDataUrl, onSuccess)
+}
+
+
+function doUploadImg(imgDataUrl, onSuccess) {
+    const formData = new FormData()
+    formData.append('img', imgDataUrl)
+
+    const XHR = new XMLHttpRequest()
+    XHR.onreadystatechange = () => {
+        if (XHR.readyState !== XMLHttpRequest.DONE) return
+        if (XHR.status !== 200) return console.error('Error uploading image')
+        const { responseText: url } = XHR
+
+        console.log('Got back live url:', url)
+        onSuccess(url)
+    }
+    XHR.onerror = (req, ev) => {
+        console.error('Error connecting to server with request:', req, '\nGot response data:', ev)
+    }
+    XHR.open('POST', '//ca-upload.com/here/upload.php')
+    XHR.send(formData)
+}
+
+function onImgInput() {
+    const input = document.getElementById('file-input')
+    input.onchange = function (event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const img = new Image();
+            img.onload = function () {
+                // Resize the canvas to fit the uploaded image
+                resizeCanvas(img);
+                // Draw the uploaded image onto the canvas
+                gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    };
+    // Trigger the file input dialog
+    input.click();
+}
+
 
 
 function addListeners() {

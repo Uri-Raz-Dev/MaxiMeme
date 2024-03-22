@@ -4,36 +4,37 @@
   width: 150px;
  }
 
- canvas {
-  width: 350px;
-  height: 600px;
- }
 
- .canvas-container {
-  position: relative;
-  width: 60vw;
- }
 }
 
-
-@media (max-width:940px) {
- img {
-  height: 150px;
-  width: 150px;
+@media (max-width:1175px) {
+ .meme-generator-container {
+  column-gap: 0;
  }
 
- canvas {
-  width: 350px;
-  height: 600px;
- }
+ /* .meme-generator-container {
+  grid-template-columns: 1fr;
+ } */
 
- .canvas-container {
-  position: relative;
-  width: 40vw;
- }
+
 }
 
-/*  */
+@media (max-width:975px) {
+
+
+ .meme-generator-container {
+  grid-template-columns: 1fr;
+ }
+
+ .txtline-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+ }
+
+
+
+}
 
 
 
@@ -47,21 +48,4 @@
  }
 
 
-}
-
-
-@media (max-width:700px) {
- canvas {
-  width: 300px;
-  height: 600px;
- }
-
- .canvas-container {
-  position: relative;
-  width: 50vw;
- }
-
- .settings-container {
-  width: 300px;
- }
 }

@@ -1,3 +1,20 @@
+.meme-generator-container {
+ grid-template-columns: 1fr 1fr 1fr;
+ column-gap: 100px;
+}
+
+canvas {
+ border-radius: 5%;
+}
+
+input[type="file"] {
+ display: none;
+}
+
+.custom-file-input {
+ cursor: pointer;
+}
+
 .comic-bubble {
  position: relative;
  padding: .625em 1.25em;
@@ -8,7 +25,6 @@
  border-radius: 1.25rem;
  text-decoration: none;
 }
-
 
 
 .comic-bubble:hover {
@@ -36,6 +52,23 @@
  width: 100px;
 }
 
+.button-container>*:hover {
+ color: var(--flash);
+}
+
+.bottom-button-container>:hover {
+ color: var(--flash);
+}
+
+#font-family-select:hover {
+ color: black;
+}
+
+#font-size-select:hover {
+ color: black;
+}
+
+
 .settings-container {
  border-radius: 10px;
  padding: 10px;
@@ -58,6 +91,7 @@
 
 .meme-input {
  margin-block-end: 20px;
+
 }
 
 .delete-btn {
