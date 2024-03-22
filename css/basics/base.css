@@ -56,12 +56,19 @@ img {
  font-family: 'Lightning', sans-serif;
 }
 
-.flash-symbol {
- color: var(--rev-flash);
- text-align: center;
-}
+
 
 h1 {
  text-align: center;
  color: var(--rev-flash);
+}
+
+.rev-flash-symbol::after {
+ color: red;
+ content: '\26A1\FE0E';
+}
+
+.flash-symbol::after {
+ color: yellow;
+ content: '\26A1\FE0E';
 }

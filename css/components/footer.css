@@ -76,3 +76,7 @@
  background: #ea4c89;
  color: white;
 }
+
+.flash-symbol {
+ color: var(--flash);
+}
