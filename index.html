@@ -8,7 +8,8 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href="https://fonts.cdnfonts.com/css/lightning" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/impact" rel="stylesheet">
-  <title>MaxiMeme</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <title>MAXIMEME</title>
 
   <link rel="stylesheet" href="css/style.css">
 
@@ -18,15 +19,20 @@
   <div class="main-layout grid">
 
     <header class="main-header full flex align-center ">
-      <a href="#" class="logo">MaxiMeme<span class="flash-symbol"></span></a>
-      <nav class="links-container clean-anchor">
-        <ul class="clean-list flex header-links">
+      <a href="#" class="logo animate__lightSpeedInLeft">MaxiMeme<span class="flash-symbol"></span></a>
+      <nav class=" main-nav links-container clean-anchor">
+        <ul class="clean-list flex header-links main-nav-list">
           <li><a class="gallery-link" href="">gallery</a></li>
           <li><a href="">about</a></li>
         </ul>
       </nav>
+      <input onclick="toggleMenu()" type="checkbox" id="menyAvPaa">
+      <label id="burger" for="menyAvPaa">
+        <div></div>
+        <div></div>
+        <div></div>
     </header>
-    <h1>CHOOSE AN IMAGE</h1>
+    <h1 class="animate__lightSpeedInLeft">CHOOSE AN IMAGE</h1>
 
     <main class="meme-generator-container">
 
@@ -85,9 +91,9 @@
               class='bx bx-down-arrow-alt'></span></button>
           <input oninput="onSetColorTxt(this.value)" class="color-picker " type="color" value="#000000"></input>
 
-          <button onclick="moveTextUp()" class="addTxt comic-bubble">up</button>
+          <button onclick="moveTextUp()" class="addTxt comic-bubble"><i class='bx bxs-up-arrow'></i></button>
 
-          <button onclick="moveTextDown()" class="addTxt comic-bubble">down</button>
+          <button onclick="moveTextDown()" class="addTxt comic-bubble"><i class='bx bxs-down-arrow'></i></button>
 
           <button onclick="alignTextLeft()" class="addTxt comic-bubble"><i class='bx bx-align-left'></i></span></button>
 
@@ -118,7 +124,7 @@
     </section>
 
     <footer class="full main-footer grid align-center justify-center">
-      <a href="#" class="logo">MaxiMeme<span class="rev-flash-symbol"></span></a>
+      <a href="#" class="logo animate__lightSpeedInRight">MaxiMeme<span class="rev-flash-symbol"></span></a>
       <small class="footer-rights">&copy; 2024 MaxiMeme. All rights reserved.</small>
       <ul class="flex footer-social clean-list">
         <li><a href="#" class="fa fa-facebook"></a></li>

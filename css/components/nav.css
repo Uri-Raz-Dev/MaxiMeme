@@ -16,6 +16,6 @@
  box-shadow: inset 0px -6px 0 var(--rev-flash);
 }
 
-.header-links .gallery-link {
- border-right: none;
+.header-links {
+ border-left: none;
 }

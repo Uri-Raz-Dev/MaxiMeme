@@ -3,5 +3,5 @@
  --logo-color: black;
  --bg-color: linear-gradient(155deg, #de2929 0%, #FFD700 100%);
  --flash: #FF0000;
- --rev-flash: #FFD700;
+ --rev-flash: rgb(255, 215, 0);
 }

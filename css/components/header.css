@@ -12,3 +12,7 @@
  flex-grow: 1;
  color: var(--rev-flash);
 }
+
+#menyAvPaa {
+ display: none;
+}

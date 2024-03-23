@@ -152,10 +152,12 @@ function onDeleteTxtLine(idx) {
 function onImgSelect(id) {
     const elMemeGen = document.querySelector('.meme-generator-container')
     const elGallery = document.querySelector('.gallery')
+    const elHeading = document.querySelector('h1')
 
 
     elMemeGen.style.display = 'grid'
     elGallery.style.display = 'none'
+    elHeading.style.display = 'none'
 
     setImg(id)
     drawImg(id)
@@ -383,66 +385,66 @@ function alignTextCenter() {
 
 
 function moveTextUp() {
-    const meme = getMemes();
-    const selectedLineIdx = meme.selectedLineIdx;
+    const meme = getMemes()
+    const selectedLineIdx = meme.selectedLineIdx
     if (selectedLineIdx !== -1) {
-        meme.lines[selectedLineIdx].posY -= 10;
+        meme.lines[selectedLineIdx].posY -= 10
 
-        meme.lines[selectedLineIdx].posY = Math.max(meme.lines[selectedLineIdx].posY, 0);
-        renderMeme();
+        meme.lines[selectedLineIdx].posY = Math.max(meme.lines[selectedLineIdx].posY, 0)
+        renderMeme()
     }
 }
 
 function moveTextDown() {
-    const meme = getMemes();
-    const selectedLineIdx = meme.selectedLineIdx;
+    const meme = getMemes()
+    const selectedLineIdx = meme.selectedLineIdx
     if (selectedLineIdx !== -1) {
-        const canvasHeight = gElCanvas.height;
-        const { txt, size } = meme.lines[selectedLineIdx];
-        const lineHeight = size * 1.286;
-        const textHeight = lineHeight;
-        const maxY = canvasHeight - textHeight;
-        meme.lines[selectedLineIdx].posY += 10;
+        const canvasHeight = gElCanvas.height
+        const { txt, size } = meme.lines[selectedLineIdx]
+        const lineHeight = size * 1.286
+        const textHeight = lineHeight
+        const maxY = canvasHeight - textHeight
+        meme.lines[selectedLineIdx].posY += 10
 
-        meme.lines[selectedLineIdx].posY = Math.min(meme.lines[selectedLineIdx].posY, maxY);
-        renderMeme();
+        meme.lines[selectedLineIdx].posY = Math.min(meme.lines[selectedLineIdx].posY, maxY)
+        renderMeme()
     }
 }
 
 function onChangeFontFamily(fontFamily, lineIdx) {
-    const meme = getMemes();
-    const selectedLineIdx = lineIdx || meme.selectedLineIdx;
+    const meme = getMemes()
+    const selectedLineIdx = lineIdx || meme.selectedLineIdx
     if (selectedLineIdx !== -1) {
-        meme.lines[selectedLineIdx].fontFamily = fontFamily;
-        renderMeme();
+        meme.lines[selectedLineIdx].fontFamily = fontFamily
+        renderMeme()
     }
 }
 
 function onChangeFontSize(fontSize, lineIdx) {
-    const meme = getMemes();
-    const selectedLineIdx = lineIdx || meme.selectedLineIdx;
+    const meme = getMemes()
+    const selectedLineIdx = lineIdx || meme.selectedLineIdx
     if (selectedLineIdx !== -1) {
-        meme.lines[selectedLineIdx].size = parseInt(fontSize);
-        renderMeme();
+        meme.lines[selectedLineIdx].size = parseInt(fontSize)
+        renderMeme()
     }
 }
 
 
 function changeFontSizeSelect(fontSize) {
     const meme = getMemes();
-    const selectedLineIdx = meme.selectedLineIdx;
+    const selectedLineIdx = meme.selectedLineIdx
     if (selectedLineIdx !== -1) {
-        meme.lines[selectedLineIdx].size = parseInt(fontSize);
-        renderMeme();
+        meme.lines[selectedLineIdx].size = parseInt(fontSize)
+        renderMeme()
     }
 }
 
 function changeFontFamilySelect(fontFamily) {
-    const meme = getMemes();
-    const selectedLineIdx = meme.selectedLineIdx;
+    const meme = getMemes()
+    const selectedLineIdx = meme.selectedLineIdx
     if (selectedLineIdx !== -1) {
-        meme.lines[selectedLineIdx].fontFamily = fontFamily;
-        renderMeme();
+        meme.lines[selectedLineIdx].fontFamily = fontFamily
+        renderMeme()
     }
 }
 
@@ -490,17 +492,25 @@ function onImgInput() {
             img.onload = function () {
                 // Resize the canvas to fit the uploaded image
                 resizeCanvas(img);
-                // Draw the uploaded image onto the canvas
                 gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
             };
             img.src = event.target.result;
         };
         reader.readAsDataURL(file);
     };
-    // Trigger the file input dialog
     input.click();
 }
 
+function toggleMenu() {
+    const body = document.body;
+    const menyAvPaaCheckbox = document.getElementById('menyAvPaa');
+
+    body.classList.toggle('menu-open');
+
+    if (!body.classList.contains('menu-open')) {
+        menyAvPaaCheckbox.checked = false;
+    }
+}
 
 
 function addListeners() {
@@ -511,3 +521,4 @@ function addListeners() {
     gElCanvas.addEventListener('mouseup', onMouseUp)
     gElCanvas.addEventListener('touchend', onTouchEnd)
 }
+

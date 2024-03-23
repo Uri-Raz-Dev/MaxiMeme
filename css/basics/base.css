@@ -72,3 +72,12 @@ h1 {
  color: yellow;
  content: '\26A1\FE0E';
 }
+
+.animate__lightSpeedInLeft {
+ animation-duration: 2s;
+}
+
+
+.animate__lightSpeedInRight {
+ animation-duration: 2s;
+}

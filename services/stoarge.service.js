@@ -11,5 +11,5 @@ function loadFromStorage(key) {
 }
 
 function saveMemesToStorage(meme) {
- localStorage.setItem('meme', JSON.stringify(meme));
+ localStorage.setItem('meme', JSON.stringify(meme))
 }
