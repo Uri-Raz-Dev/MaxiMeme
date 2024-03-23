@@ -1,7 +1,7 @@
 .main-footer {
- position: static;
+ position: absolute;
  width: 100%;
- bottom: 0;
+ bottom: -175px;
  place-items: center;
  margin-top: auto;
  row-gap: 2.375rem;
