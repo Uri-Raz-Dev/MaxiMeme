@@ -82,7 +82,7 @@ input[type="file"] {
 .bottom-button-container {
  display: flex;
  justify-content: space-around;
- margin-block-start: 250px;
+ margin-block-start: 150px;
  gap: .625rem;
 }
 
