@@ -1,6 +1,7 @@
 .main-layout {
  grid-template-columns: minmax(30px, 1fr) minmax(auto, 1fr) minmax(30px, 1fr);
  row-gap: 1.875rem;
+ justify-content: space-between;
 }
 
 .main-layout>*.full {
