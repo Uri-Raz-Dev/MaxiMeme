@@ -2,7 +2,7 @@
 
 var gElCanvas
 var gCtx
-var gLine = []
+var gLine = gMeme.selectedLineIdx = -1
 var isDragging = false
 var gDragOffsetX, gDragOffsetY
 
@@ -189,8 +189,7 @@ function onClearCanvas() {
 
 function downloadCanvas(elLink) {
 
-    const meme = getMemes()
-    meme.selectedLineIdx = -1
+    gLine
     renderMeme()
 
 
