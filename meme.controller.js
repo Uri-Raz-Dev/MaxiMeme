@@ -153,11 +153,13 @@ function onImgSelect(id) {
     const elMemeGen = document.querySelector('.meme-generator-container')
     const elGallery = document.querySelector('.gallery')
     const elHeading = document.querySelector('h1')
+    const elFooter = document.querySelector('.main-footer')
 
 
     elMemeGen.style.display = 'grid'
     elGallery.style.display = 'none'
     elHeading.style.display = 'none'
+    elFooter.style.position = 'absolute'
 
     setImg(id)
     drawImg(id)
