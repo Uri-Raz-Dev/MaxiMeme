@@ -185,11 +185,19 @@ function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-
+function onDeleteRect() {
+    const meme = getMemes()
+    meme.selectedLineIdx = -1
+    renderMeme()
+}
 function downloadCanvas(elLink) {
 
     const meme = getMemes()
-    meme.selectedLineIdx = -1
+
+
+    elLink.download = 'my-img'
+    const dataUrl = gElCanvas.toDataURL()
+    elLink.href = dataUrl
 
 
     renderMeme()
@@ -479,25 +487,24 @@ function doUploadImg(imgDataUrl, onSuccess) {
 }
 
 function onImgInput(ev) {
-    const input = document.getElementById('file-input')
+    const input = document.getElementById('file-input');
     input.onchange = function (event) {
-        const file = event.target.files[0]
-        if (!file) return
-        console.log(file)
-        const reader = new FileReader()
-        reader.onload = function (event) {
-            const img = new Image()
-            img.onload = function () {
-                resizeCanvas(img)
-                gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-            }
-            img.src = event.target.result
-        }
-        reader.readAsDataURL(file)
-    }
-    input.click()
-}
+        const file = event.target.files[0];
+        if (!file) return;
 
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const img = new Image();
+            img.onload = function () {
+                resizeCanvas(img);
+                gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    };
+    input.click();
+}
 
 
 function toggleMenu() {
