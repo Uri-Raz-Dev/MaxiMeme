@@ -185,14 +185,12 @@ function onClearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function onDeleteRect() {
-    const meme = getMemes()
-    meme.selectedLineIdx = -1
-    renderMeme()
-}
+
 function downloadCanvas(elLink) {
 
     const meme = getMemes()
+    meme.selectedLineIdx = -1
+    renderMeme()
 
 
     elLink.download = 'my-img'
