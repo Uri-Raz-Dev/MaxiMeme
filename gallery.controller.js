@@ -20,6 +20,5 @@ function showGallery() {
  const elGallery = document.querySelector('.gallery')
 
 
- elMemeGen.style.display = 'none'
  elGallery.style.display = 'flex'
 }

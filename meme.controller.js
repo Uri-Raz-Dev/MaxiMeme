@@ -11,10 +11,10 @@ function onInit() {
     gCtx = gElCanvas.getContext('2d')
     const elMemeGen = document.querySelector('.meme-generator-container')
     elMemeGen.style.display = 'none'
-    renderMeme()
-    renderSettings()
     renderGallery()
 
+    renderMeme()
+    renderSettings()
     addListeners()
 }
 
@@ -189,16 +189,16 @@ function onClearCanvas() {
 
 function downloadCanvas(elLink) {
 
-    elLink.download = 'my-img'
-
-    const dataUrl = gElCanvas.toDataURL()
-    elLink.href = dataUrl
-
     const meme = getMemes()
     meme.selectedLineIdx = -1
     renderMeme()
-}
 
+
+    elLink.download = 'my-img'
+    const dataUrl = gElCanvas.toDataURL()
+    elLink.href = dataUrl
+
+}
 function onAddTxtLine() {
 
     addTxtLine()
@@ -482,26 +482,27 @@ function doUploadImg(imgDataUrl, onSuccess) {
     XHR.send(formData)
 }
 
-function onImgInput() {
+function onImgInput(ev) {
     const input = document.getElementById('file-input')
     input.onchange = function (event) {
-        const file = event.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
+        const file = event.target.files[0]
+        if (!file) return
+        console.log(file)
+        const reader = new FileReader()
         reader.onload = function (event) {
-            const img = new Image();
+            const img = new Image()
             img.onload = function () {
-                // Resize the canvas to fit the uploaded image
-                resizeCanvas(img);
-                gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-            };
-            img.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-    };
-    input.click();
+                resizeCanvas(img)
+                gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+            }
+            img.src = event.target.result
+        }
+        reader.readAsDataURL(file)
+    }
+    input.click()
 }
+
+
 
 function toggleMenu() {
     const body = document.body;
