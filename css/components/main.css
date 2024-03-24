@@ -133,3 +133,7 @@ input[type="file"] {
 .gallery {
  margin-block-end: 200px;
 }
+
+.meme-input {
+ border-radius: 10px;
+}
