@@ -46,6 +46,7 @@ input[type="file"] {
  align-items: center;
  justify-content: center;
  place-items: center;
+
 }
 
 .button-container>* {
@@ -71,18 +72,9 @@ input[type="file"] {
 }
 
 
-.settings-container {
- border-radius: 10px;
- padding: 10px;
- background: inherit;
- /* background: linear-gradient(to bottom, #8B4513, #CD853F); */
- box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
 .bottom-button-container {
  display: flex;
  justify-content: space-around;
- margin-block-start: 250px;
  gap: .625rem;
 }
 
@@ -110,11 +102,19 @@ input[type="file"] {
 }
 
 .settings-container {
- display: flex;
- flex-direction: column;
- align-items: center;
+ display: grid;
+ grid-template-rows: 1fr 345px 180px;
+ place-items: center;
+ border-radius: 10px;
+ padding-top: 10px;
+ padding-left: 10px;
+ padding-right: 10px;
+ padding-bottom: 0px;
+ background: inherit;
+ /* background: linear-gradient(to bottom, #8B4513, #CD853F); */
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+ /* margin-block-end: 195px; */
 }
-
 
 
 .button-container>* {
@@ -123,4 +123,8 @@ input[type="file"] {
 
 .button-container:last-child {
  margin-top: 20px;
+}
+
+.line-container {
+ justify-self: start;
 }
